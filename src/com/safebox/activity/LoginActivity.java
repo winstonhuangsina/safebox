@@ -65,7 +65,7 @@ public class LoginActivity extends Activity {
 	private LoginAction loginAction;
 	private UserProfile userProfile;
 	private String inproper_username_psw, type_number_char;
-	private String user_name_psw_incorrect;
+	private String user_name_psw_incorrect, login_success;
 	private long exitTime = 0;
 	public MyApplication myApplication;
 	private CheckBox remember_password_check = null, auto_login_check = null;
@@ -130,7 +130,7 @@ public class LoginActivity extends Activity {
 		register_link = (TextView) findViewById(R.id.register_link);
 		remember_password_check = (CheckBox)findViewById(R.id.remember_password_check);
 		auto_login_check = (CheckBox)findViewById(R.id.auto_login_check);
-		weibo_login = (Button) findViewById(R.id.weibo_login);
+		//weibo_login = (Button) findViewById(R.id.weibo_login);
 		commUI = new CommonUI(LoginActivity.this);
 		
 		// validation msg
@@ -139,11 +139,14 @@ public class LoginActivity extends Activity {
 		// valication msg for login
 		user_name_psw_incorrect = this
 				.getString(R.string.user_name_psw_incorrect);
+		login_success = this
+				.getString(R.string.login_success);
+		
 		// identify if user login, yes to show account page.
 		register_link.setClickable(true);
 		register_link.setOnClickListener(listener);
 		login.setOnClickListener(listener);
-		weibo_login.setOnClickListener(listener);
+		//weibo_login.setOnClickListener(listener);
 	}
 
 	private void autoLoginAndRememberPsw() {
@@ -223,9 +226,9 @@ public class LoginActivity extends Activity {
 					validateNamePswExist();
 				}
 				break;
-			case R.id.weibo_login:
+			/*case R.id.weibo_login:
 				loginByWeibo();
-				break;
+				break;*/
 			default: 
 				break;
 			}
@@ -299,24 +302,11 @@ public class LoginActivity extends Activity {
 		} else if (!username_matcher.matches()) {
 			commUI.toastShow(LoginActivity.this, type_number_char);
 			return false;
-		} /*else if (!validateNamePswExist()) {
-			Log.v("validateNamePswExist = ", "false");
-			commUI.toastShow(LoginActivity.this, user_name_psw_incorrect);
-			return false;
-		}*/ else {
+		}  else {
 			return true;
 		}
 	}
 
-	/*private void clickToAccountList() {
-		// pass context to the next activity.
-		Intent intent = new Intent();
-		intent.putExtra("userName", userNameString);
-		intent.putExtra("password", psdString);
-		intent.setClass(LoginActivity.this, ShowAccountListActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);  
-	}*/
 
 	private void validateNamePswExist() {
         commUI.showProgressDialog();
@@ -324,7 +314,7 @@ public class LoginActivity extends Activity {
         Log.v("validateNamePswExist password = ", psdString);
         loginThread = new LoginThread(LoginActivity.this);
         loginThread.setRunnableParams(userNameString, psdString, MsgString.PARAMS_QUERY);
-        loginThread.setHandleMsg(MsgString.SUCCESS, user_name_psw_incorrect);
+        loginThread.setHandleMsg(login_success, user_name_psw_incorrect);
         loginThread.setHandleUIParams(remember_password_check, commUI);
         loginThread.setHandleParams(myApplication);
         loginThread.startToRun();

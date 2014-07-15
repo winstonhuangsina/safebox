@@ -91,7 +91,7 @@ public class LoginThread {
 	            switch(msg.what) {
 	            case 1:
 	            	commUI.dismissProgressDialog();
-	            	commUI.toastShow(succMsg);
+	            	//commUI.toastShow(succMsg);
 	            	user_id_from_query = (String)msg.obj;
 	            	saveValueAndToListActivity();
 	                break;

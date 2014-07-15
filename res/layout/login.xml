@@ -102,7 +102,7 @@
             android:textColor="#888"
             android:textColorLink="#FF0066CC" />
         
-        <Button
+      <!--   <Button
             android:id="@+id/weibo_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:layout_below="@id/register_link"
             android:background="@drawable/background_login_div_bg"
             android:text="weibo" />
-        
+         -->
     </RelativeLayout>
 
 </LinearLayout>
