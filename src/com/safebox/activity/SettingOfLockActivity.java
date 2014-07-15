@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ShareActionProvider;
 
 import com.safebox.action.CommonDBAction;
 import com.safebox.action.LoginAction;
@@ -39,8 +42,9 @@ public class SettingOfLockActivity  extends Activity {
 	private final static String ACTIVITY_NAME = MsgString.FROM_SETTING_OF_LOCK;
 	private boolean from_setting_of_lock, from_add_account, from_show_account_list, from_save_account, from_unlock;
 	private Class<?> lastActivity = null;
-	private String set_lock_text, clear_lock_text;
+	private String set_lock_text = "", clear_lock_text = "";
 	private String patternString; 
+	private SharedPreferences sp;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -91,14 +95,13 @@ private String getRunningActivityName(){
 	private void initial() {
 		clear_lock_button = (Button) findViewById(R.id.clear_lock_button);
 		reset_lock_button = (Button) findViewById(R.id.reset_lock_button);
-		test_authorize_button = (Button) findViewById(R.id.test_authorize_button);
-		
-		test_button = (Button) findViewById(R.id.test_button);
+		/*test_authorize_button = (Button) findViewById(R.id.test_authorize_button);
+		test_button = (Button) findViewById(R.id.test_button);*/
 		//login();
 		clear_lock_button.setOnClickListener(listener);
 		reset_lock_button.setOnClickListener(listener);
-		test_button.setOnClickListener(listener);
-		test_authorize_button.setOnClickListener(listener);
+		/*test_button.setOnClickListener(listener);
+		test_authorize_button.setOnClickListener(listener);*/
 		
 		set_lock_text = this.getString(R.string.set_lock_pattern);
 		clear_lock_text = this.getString(R.string.clear_lock_pattern);
@@ -111,6 +114,56 @@ private String getRunningActivityName(){
 			} else
 				clear_lock_button.setText(set_lock_text);
 		}
+	}
+	
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menuonactionbar, menu);
+		
+		// Get the ActionProvider         
+		ShareActionProvider provider = (ShareActionProvider) menu.findItem(R.id.menu_share)  
+                .getActionProvider();  
+        // Initialize the share intent  
+        Intent intent = new Intent(Intent.ACTION_SEND);  
+        intent.setType("text/plain");  
+        intent.putExtra(Intent.EXTRA_TEXT, "Text I want to share");  
+        provider.setShareIntent(intent);  
+        
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		//Intent intent = new Intent();
+		MyApplication myApplication = (MyApplication) getApplication();
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			toNextActivity(ShowAccountListActivity.class, MsgString.BACKWARD);
+            break;
+		case R.id.add_account:
+			toNextActivity(AddAccountActivity.class, MsgString.FORWARD);
+			break;
+		case R.id.menu_settings:
+			Log.v("to setting of lock activity", "");
+			toNextActivity(SettingOfLockActivity.class, MsgString.FORWARD);
+			break;
+		case R.id.logout:
+			myApplication.cleanUsername();
+			sp = this.getSharedPreferences("userInfo", MODE_PRIVATE);
+			sp.edit().putBoolean(MsgString.AUTO_LOGIN_IS_CHECK, false).commit();
+			toNextActivity(LoginActivity.class, MsgString.BACKWARD);
+			break;
+		case R.id.exit:
+			myApplication.exit();
+			System.exit(0);
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	private OnClickListener listener = new View.OnClickListener() {
@@ -127,12 +180,12 @@ private String getRunningActivityName(){
 			case R.id.reset_lock_button:
 				toNextActivity(UnLockActivity.class, MsgString.FORWARD);
 				break;
-			case R.id.test_button:
+			/*case R.id.test_button:
 					toNextActivity(DeviceLocation.class, MsgString.FORWARD);
 				break;
 			case R.id.test_authorize_button:
 					toNextActivity(AuthorizeActivity.class, MsgString.FORWARD);
-				break;
+				break;*/
 			default:
 				break;
 			}

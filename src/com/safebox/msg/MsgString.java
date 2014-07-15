@@ -68,6 +68,8 @@ public class MsgString {
 	public final static String SUCCESS = "SUCCESS";
 	public final static String FAILED = "FAILED";
 	
+	public final static String PARAMS_LOCATION = "PARAMS_LOCATION";
+	public final static String PARAMS_DEVICE = "PARAMS_DEVICE";
 	
 	//Shared Preferences
 	

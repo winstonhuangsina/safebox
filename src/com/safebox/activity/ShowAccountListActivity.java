@@ -331,6 +331,7 @@ public class ShowAccountListActivity extends Activity{
 			break;
 		case R.id.exit:
 			myApplication.exit();
+			System.exit(0);
 			break;
 		default:
 			break;

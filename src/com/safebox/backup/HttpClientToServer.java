@@ -43,6 +43,14 @@ public class HttpClientToServer {
 		listOfParams.add(new BasicNameValuePair(MsgString.PARAMS_PASSWORD, password));
 		listOfParams.add(new BasicNameValuePair(MsgString.PARAMS_ACTION, action));
 	}
+	
+	public void setLocation(String location){
+		listOfParams.add(new BasicNameValuePair(MsgString.PARAMS_LOCATION, location));
+	}
+	
+	public void setDevice(String device){
+		listOfParams.add(new BasicNameValuePair(MsgString.PARAMS_DEVICE, device));
+	}
 		
 	private void initialServerURL(){
 		if(MsgString.LOCAL_SERVER_URL_TRIGGER){

@@ -14,12 +14,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/re_setup_lock_pattern" />
-    <Button
+    <!-- <Button
         android:id="@+id/turn_off_lock_pattern"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/turn_off_lock_pattern" />
-    <Button
+        android:text="@string/turn_off_lock_pattern" /> -->
+   <!--  <Button
         android:id="@+id/test_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -29,6 +29,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="测试授权按钮" />
-    
+     -->
 
 </LinearLayout>

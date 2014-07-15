@@ -54,8 +54,6 @@ public class GetContacts {
 		getPhoneContacts();
 	}
 
-	  
-	
 	
 	/**得到手机通讯录联系人信息**/
 	private void getPhoneContacts() {
