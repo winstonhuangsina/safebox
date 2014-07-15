@@ -28,8 +28,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
 public class UnLockActivity extends Activity implements
         LockPatternView.OnPatternListener {
     private static final String TAG = "LockActivity";
