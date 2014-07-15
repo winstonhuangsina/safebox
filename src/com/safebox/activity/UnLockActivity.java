@@ -113,26 +113,6 @@ private String getRunningActivityName(){
 		System.out.println("#########onDestroy() = "+getRunningActivityName());
 	}
 
-    /*@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-    	super.onKeyDown(keyCode, event);
-        // disable back key
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-        	overridePendingTransition(R.anim.callback_in_from_left,
-					R.anim.callback_out_to_right);
-            return true;
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }*/
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }*/
-
     @Override
     public void onPatternStart() {
         Log.d(TAG, "onPatternStart");
