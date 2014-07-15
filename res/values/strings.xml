@@ -1,0 +1,136 @@
+<resources>
+
+    <!-- App 基础数据 -->
+    <string name="app_name">测试</string>
+    <string name="username_hint">Enter User Name</string>
+    <string name="password_hint">Enter Password</string>
+
+    <!-- 添加用于保存的账号密码 -->
+    <string name="add_account_info">添加账号信息</string>
+    <string name="site_name_hint">网站/app/银行等名称</string>
+    <string name="account_name_hint">账号</string>
+    <string name="account_password_hint">密码</string>
+    <string name="save_account_hint">保存</string>
+    <string name="del_account_hint">删除</string>
+    <string name="gesture_password">开启手势密码加密，确保信息更安全</string>
+
+    <!-- 注册页面 -->
+    <string name="register">Register</string>
+    <string name="register_label_username">注册</string>
+    <string name="register_label_username_hint">手机号/邮箱/用户名</string>
+    <string name="register_label_password">密码</string>
+    <string name="register_password_re_label">请再次输入密码</string>
+    <string name="register_button_label">注册</string>
+    <string name="login_on_register_page">已有账号，点击<a href="#">登录</a></string>
+    <string name="inproper_username_psw">用户名与密码都不能为空，且长度要等于多余6个字符</string>
+    <string name="type_number_char">用户名只能是中文，字母或者数字</string>
+    <string name="user_name_exist">该用户名已经存在</string>
+    <string name="user_name_not_empty">用户名或密码不能为空</string>
+    <string name="password_diff">两次输入的密码不同，请重新输入</string>
+
+    <!-- Login page -->
+    <string name="login">Login</string>
+    <string name="login_label_username">登录</string>
+    <string name="login_label_username_hint">请输入你的用户名</string>
+    <string name="login_label_password">密码</string>
+    <string name="login_button_label">登录</string>
+    <string name="register_on_login_page">还没有账号，点击<a href="#">注册</a></string>
+    <string name="user_name_psw_incorrect">账号或密码有误，请确认后再次输入</string>
+    <string name="auto_login">自动登录</string>
+    <string name="remember_password">记住密码</string>
+
+    <!-- 修改用户资料 -->
+    <string name="edit_username_editview">用户名</string>
+    <string name="edit_password_editview">密码</string>
+    <string name="edit_userprofile_button">保存</string>
+    <string name="edit_email_editview">邮箱地址</string>
+    
+    
+    <!-- Save/Edit Account Info Page -->
+    <string name="account_info_imcomplete">添加完整的信息，以便查询</string>
+    <string name="spin_account_type_hint">请账户类型</string>
+
+    <!-- Show account page -->
+    <string name="nav_next">Navigation to Next</string>
+    <string name="lock_account_icon">lock account icon</string>
+
+    <string-array name="account_type_array">
+        <item> 请选择账户类型 </item>
+        <item> 网站 </item>
+        <item> App </item>
+        <item> 银行卡 </item>
+        <item> 其它 </item>
+    </string-array>
+
+    
+    <string name="validate_email_addr">邮箱地址格式有误，请重新输入</string>
+    <string name="save_success">保存成功</string>
+    
+    <!-- 测试按钮，用于触发单个部件，以方便测试，调试 -->
+    <string name="test_by_button">测试按钮</string>
+    <string name="usr_name">用户名</string>
+    <string name="app_addr">IP地址</string>
+    
+    
+    <!-- 退出APP -->
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="dialog_title">真的要离开？</string>
+     <string name="dialog_msg">确定要离开？</string>
+     <string name="toast_twice_press">再按一次退出程序</string>
+     
+    <!-- actionbar menu list -->
+    <string name="exit">退出</string>
+    <string name="share">分享</string>
+    <string name="logout">注销</string>
+    <string name="setting">设置</string>
+    <string name="add_account">新增账户</string>
+    
+    <!-- share menu text -->
+    <string name="share_type">text/plain</string>
+    <string name="share_extra_text">Text I want to share</string>
+    
+    <!--  -->
+    <string name="encrypt_key">safebox_encrypt_code</string>
+    
+    
+    <!-- Thread test -->
+    <string name="get_layoutbeanlist_success">success</string>
+    <string name="get_layoutbeanlist_failure">failure</string>
+    
+    <!-- lockpattern lock -->
+    <string name="lockpattern_continue">继续</string>
+    <string name="lockpattern_cancel">取消</string>
+    <string name="lockpattern_try_again">取消</string>
+    <string name="lockpattern_reset">重置</string>
+    <string name="lockpattern_recording_incorrect_too_short">"至少连接4个点，请重试"</string>
+    <string name="lockpattern_error">"手势密码不对"</string>
+    <string name="lockscreen_access_pattern_start">Pattern started</string>
+    <string name="lockscreen_access_pattern_cleared">Pattern cleared</string>
+    <string name="lockscreen_access_pattern_cell_added">Cell added</string>
+    <string name="lockscreen_access_pattern_detected">Pattern completed</string>
+    <string name="lockpattern_forget"><a href="#">忘记手势密码</a></string>
+	
+    <!-- forget lock pattern, reset by login -->
+      <string name="lock_forget_login">Login</string>
+    <string name="lock_forget_login_label_username">确认</string>
+    <string name="lock_forget_login_label_username_hint">请输入你的用户名</string>
+    <string name="lock_forget_login_label_password">密码</string>
+    <string name="lock_forget_login_button_label">取消</string>
+    <string name="enter_old_lock_pattern">请先输入旧的手势密码解锁</string>
+    <string name="enter_lock_pattern">请输入手势密码解锁</string>
+    <string name="unlock_cancel_link"><a href="#">返回</a></string>
+    <string name="clean_lock_successfully">清除手势密码成功</string>
+   
+    
+    <!-- setting of lock activity -->
+    <string name="set_lock_pattern">设置手势密码</string>
+    <string name="clear_lock_pattern">清空手势密码</string>
+    <string name="re_setup_lock_pattern">重置手势密码</string>
+    
+    <string name="turn_off_lock_pattern">关闭手势密码</string>
+    <string name="turn_off_lock_pattern_by_unlock">关闭手势密码</string>
+    <string name="clear_lock_by_unlock_link">通过解锁来清空手势密码</string>
+    
+    
+</resources>

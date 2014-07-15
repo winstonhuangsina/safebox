@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:textStyle="normal" 
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dip"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="15dip" >
+
+        <Spinner
+            android:id="@+id/spin_account_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp" />
+
+        <EditText
+            android:id="@+id/site_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spin_account_type"
+            android:hint="@string/site_name_hint" />
+
+        <EditText
+            android:id="@+id/account_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/site_name"
+            android:hint="@string/account_name_hint" />
+
+        <EditText
+            android:id="@+id/account_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/account_name"
+            android:hint="@string/account_password_hint" />
+
+        <Button
+            android:id="@+id/save_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/account_password"
+            android:layout_below="@id/account_password"
+            android:background="#FFFFFF"
+            android:text="@string/save_account_hint" />
+
+         <Button
+            android:id="@+id/del_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/account_password"
+            android:layout_toLeftOf="@id/save_account"
+            android:background="#FFFFFF"
+            android:text="@string/del_account_hint" />
+        
+        <CheckBox
+            android:id="@+id/checkbox_gesture_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/del_account"
+            android:text="@string/gesture_password"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

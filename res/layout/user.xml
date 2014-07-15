@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dip"
+    >
+    <TextView
+        android:id="@+id/account_name"
+        android:layout_width="180dip"
+        android:layout_height="30dip"
+        android:text="@string/usr_name"
+        android:textSize="10pt"
+        android:singleLine="true"
+        android:gravity="left"
+        
+    />
+    <TextView
+        android:id="@+id/account_password"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="@string/app_addr"
+        android:textSize="10pt"
+        android:gravity="right"
+        
+    />
+</LinearLayout>

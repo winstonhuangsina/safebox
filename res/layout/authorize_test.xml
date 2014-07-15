@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <Button
+        android:id="@+id/authorize_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="测试授权按钮" />
+    <TextView
+            android:id="@+id/show_authorize_text"
+            style="@style/normalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="测试授权文本" />
+
+</LinearLayout>

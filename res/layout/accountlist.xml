@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/lock_account_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@drawable/locked"
+            android:contentDescription="@string/lock_account_icon" />
+
+        <TextView
+            android:id="@+id/site_name_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:textSize="22sp" />
+
+        <!--
+             <TextView
+            android:id="@+id/account_password_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp" />
+        -->
+
+        <ImageView
+            android:id="@+id/img_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            android:background="@drawable/navigation_next_item"
+            android:contentDescription="@string/nav_next" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/account_type_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:background="#797979"
+        android:orientation="horizontal"
+        android:visibility="gone" > <!-- 通过这个来控件要不要分隔 -->
+    >
+    </LinearLayout>
+
+</LinearLayout>

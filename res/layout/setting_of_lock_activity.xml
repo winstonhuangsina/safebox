@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/clear_lock_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_lock_pattern" />
+    <Button
+        android:id="@+id/reset_lock_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/re_setup_lock_pattern" />
+    <Button
+        android:id="@+id/turn_off_lock_pattern"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/turn_off_lock_pattern" />
+    <Button
+        android:id="@+id/test_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="测试按钮" />
+    <Button
+        android:id="@+id/test_authorize_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="测试授权按钮" />
+    
+
+</LinearLayout>

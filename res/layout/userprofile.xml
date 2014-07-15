@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_register"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/userprofile_div"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="15dp" >
+
+        <!-- 账号 -->
+
+        <EditText
+            android:id="@+id/edit_username_editview"
+            android:enabled="false"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:hint="@string/edit_username_editview"
+            android:inputType="text"
+            android:singleLine="true" />
+        <!-- 密码 text -->
+
+        <EditText
+            android:id="@+id/edit_password_editview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_username_editview"
+            android:hint="@string/edit_password_editview"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+        
+        <EditText
+            android:id="@+id/edit_email_editview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_password_editview"
+            android:hint="@string/edit_email_editview"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
+
+        <!-- edit button -->
+
+        <Button
+            android:id="@+id/edit_userprofile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/edit_password_editview"
+            android:layout_below="@id/edit_password_editview"
+            android:text="@string/edit_userprofile_button" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </RelativeLayout>
+
+</LinearLayout>

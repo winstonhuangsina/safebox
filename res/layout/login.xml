@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+   
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+   <!-- 
+    android:background="@drawable/background_register"
+    <RelativeLayout
+        android:id="@+id/register_div"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dip"
+        android:background="@drawable/background_login_div_bg"
+        android:padding="15dip" > -->
+	<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dip"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="15dip" >
+        <!-- 账号 -->
+
+        <TextView
+            android:id="@+id/login_user_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/login_label_username" />
+
+        <EditText
+            android:id="@+id/login_username_input"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_user_label"
+            android:hint="@string/login_label_username_hint"
+            android:inputType="text"
+            android:singleLine="true" />
+        
+        <!-- android:background="@drawable/texteditbackground"  -->
+        <!-- 密码 text -->
+
+        <TextView
+            android:id="@+id/login_password_label"
+            style="@style/normalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_username_input"
+            android:layout_marginTop="3dp"
+            android:text="@string/login_label_password" />
+
+        <EditText
+            android:id="@+id/login_password_input"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_password_label"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <!-- 登录button -->
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/login_password_input"
+            android:layout_below="@id/login_password_input"
+            android:background="@drawable/background_login_div_bg"
+            android:text="@string/login_button_label" />
+        
+        <CheckBox  
+            android:id="@+id/remember_password_check"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_below="@id/login_password_input"  
+            android:text="@string/remember_password"   
+            android:textSize="13sp"/>  
+  
+        <CheckBox  
+            android:id="@+id/auto_login_check"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_below="@id/remember_password_check"  
+            android:text="@string/auto_login"  
+            android:textSize="13sp" />  
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+	<!-- 注册点击链接 -->
+        <TextView
+            android:id="@+id/register_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/register_on_login_page"
+            android:textColor="#888"
+            android:textColorLink="#FF0066CC" />
+        
+        <Button
+            android:id="@+id/weibo_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/register_link"
+            android:layout_below="@id/register_link"
+            android:background="@drawable/background_login_div_bg"
+            android:text="weibo" />
+        
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/lock_setup_unlock_background"
+    android:orientation="vertical"
+    android:textStyle="normal" >
+
+    <TextView
+        android:id="@+id/enter_lock_pattern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/enter_lock_pattern"
+        android:textColor="#FFFFFF"
+        android:textSize="19sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.safebox.msg.LockPatternView
+            android:id="@+id/lock_pattern"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/unlock_cancel_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/lock_pattern"
+            android:layout_below="@id/lock_pattern"
+            android:layout_marginLeft="30dp"
+            android:text="@string/unlock_cancel_link"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/lockpattern_forget_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/lock_pattern"
+            android:layout_below="@id/lock_pattern"
+            android:layout_marginRight="30dp"
+            android:text="@string/lockpattern_forget"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
+    </RelativeLayout>
+
+</LinearLayout>
