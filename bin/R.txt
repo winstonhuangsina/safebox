@@ -588,6 +588,7 @@ int string login_success 0x7f070038
 int string logout 0x7f07004c
 int string logout_success 0x7f070051
 int string nav_next 0x7f07003f
+int string network_not_available 0x7f07006f
 int string ok 0x7f070002
 int string password_diff 0x7f07002e
 int string password_hint 0x7f07001b

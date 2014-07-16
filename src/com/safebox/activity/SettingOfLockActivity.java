@@ -122,7 +122,7 @@ private String getRunningActivityName(){
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menuonactionbar, menu);
-		
+		menu.findItem(R.id.menu_settings).setVisible(false);
 		// Get the ActionProvider         
 		ShareActionProvider provider = (ShareActionProvider) menu.findItem(R.id.menu_share)  
                 .getActionProvider();  
@@ -146,10 +146,10 @@ private String getRunningActivityName(){
 		case R.id.add_account:
 			toNextActivity(AddAccountActivity.class, MsgString.FORWARD);
 			break;
-		case R.id.menu_settings:
+		/*case R.id.menu_settings:
 			Log.v("to setting of lock activity", "");
 			toNextActivity(SettingOfLockActivity.class, MsgString.FORWARD);
-			break;
+			break;*/
 		case R.id.logout:
 			myApplication.cleanUsername();
 			sp = this.getSharedPreferences("userInfo", MODE_PRIVATE);

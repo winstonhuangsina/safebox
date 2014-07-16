@@ -57,7 +57,7 @@ public class ShowAccountListActivity extends Activity{
 	private final static String ACCOUNT_PASSWORD = MsgString.ACCOUNT_PASSWORD, ACCOUNT_TYPE = MsgString.ACCOUNT_TYPE;
 	private final static String SITE_NAME = MsgString.SITE_NAME, IS_LOCKED = MsgString.IS_LOCKED;
 	private final static String AUTO_LOGIN_IS_CHECK = MsgString.AUTO_LOGIN_IS_CHECK;
-	String logout_success; 
+	String logout_success, share_type, share_extra_text; 
 	private SharedPreferences sp;
 	private CommonUI commUI;
 	SimpleAdapter testListAdapter;
@@ -84,10 +84,14 @@ public class ShowAccountListActivity extends Activity{
 		
 		setContentView(R.layout.testlistview);
 		logout_success = this.getString(R.string.logout_success);
+		share_type = this.getString(R.string.share_type);
+		share_extra_text = this.getString(R.string.share_extra_text);
+		
 		commUI = new CommonUI(ShowAccountListActivity.this);
 		myApplication = (MyApplication) getApplication();
 		myApplication.addActivity(this);
 		mListView = (ListView) findViewById(R.id.listview);
+		
 		new Thread(runnable).start();
 		clickToEdit();
 	}
@@ -103,9 +107,9 @@ public class ShowAccountListActivity extends Activity{
 			case MSG_SUCCESS:
 				
 				listForAdapter= (ArrayList<AccountLayoutBean>) msg.obj;
-				Toast.makeText(getApplication(),
+				/*Toast.makeText(getApplication(),
 						getApplication().getString(R.string.get_layoutbeanlist_success),
-						Toast.LENGTH_LONG).show();
+						Toast.LENGTH_LONG).show();*/
 				listAdapter = new ShowAccountListAdapter(ShowAccountListActivity.this, listForAdapter);
 		        listAdapter.notifyDataSetChanged();
 				mListView.setAdapter(listAdapter);
@@ -225,9 +229,6 @@ public class ShowAccountListActivity extends Activity{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		   String share_type = this.getString(R.string.share_type);
-		   String share_extra_text = this.getString(R.string.share_extra_text);
-		   
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menuonactionbar, menu);
 

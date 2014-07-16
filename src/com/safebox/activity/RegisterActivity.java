@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 
 import com.safebox.action.RegisterAction;
 import com.safebox.action.ShowAccountListAction;
-import com.safebox.backup.HttpClientToServer;
 import com.safebox.backup.TestByButtonActivity;
 import com.safebox.bean.UserProfile;
 import com.safebox.msg.CommonUI;
+import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
 

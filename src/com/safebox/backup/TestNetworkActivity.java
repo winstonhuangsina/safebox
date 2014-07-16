@@ -1,6 +1,7 @@
 package com.safebox.backup;
 
 import com.safebox.activity.LoginActivity;
+import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 
 import intent.pack.R;

@@ -9,7 +9,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.safebox.activity.LoginActivity;
-import com.safebox.backup.HttpClientToServer;
 
 public class CommonUI extends Thread{
 	ProgressDialog progressDialog;

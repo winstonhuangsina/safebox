@@ -13,18 +13,19 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.CheckBox;
+
 import com.safebox.action.LoginAction;
 import com.safebox.activity.LoginActivity;
 import com.safebox.activity.ShowAccountListActivity;
-import com.safebox.backup.HttpClientToServer;
 import com.safebox.msg.CommonUI;
+import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
 
 public class LoginThread {
 
 	ProgressDialog progressDialog;
-	String username, password, action, failureMsg, succMsg;
+	String username, password, action, failureMsg, succMsg, network_not_available;
 	String user_id_from_query;
 	Context context;
 	boolean queryRomoteDBResult = false;
@@ -47,32 +48,41 @@ public class LoginThread {
 	}
 	
 	public void startToRun(){
-		new Thread(downloadRun).start();
+		new Thread(connThread).start();
 	}
 	
-	Runnable downloadRun = new Runnable(){
+	Runnable connThread = new Runnable(){
 	  	  @Override
 		public void run() {
 			Looper.prepare();
 			Log.v("Runnable username = ", username);
 			Log.v("Runnable password = ", password);
+			//TODO if network is ok.
+			//else 
+    			
 			HttpClientToServer httpClientToServer = new HttpClientToServer(
 					username, password, MsgString.PARAMS_QUERY);
-			String response = httpClientToServer.doPost();
-			Log.v("response is ", response);
-			if (response.equals(MsgString.FAILED)) {
-				handler.obtainMessage(0, response).sendToTarget();
-			} else {
-				handler.obtainMessage(1, response).sendToTarget();
-				//handler.obtainMessage(1, ).sendToTarget();
+			if(httpClientToServer.isNetworkAvailable(context)){
+				String response = httpClientToServer.doPost();
+				Log.v("response is ", response);
+				if (response.equals(MsgString.FAILED)) {
+					handler.obtainMessage(0, failureMsg).sendToTarget();
+				} else {
+					handler.obtainMessage(1, response).sendToTarget();
+					//handler.obtainMessage(1, ).sendToTarget();
+				}
+			}else{
+				handler.obtainMessage(0, network_not_available).sendToTarget();
 			}
+			
 			Looper.loop();
 		}
 	  };
 		
-	public void setHandleMsg(String succMsg, String failureMsg){
+	public void setHandleMsg(String succMsg, String failureMsg, String network_not_available){
 		this.failureMsg = failureMsg;
 		this.succMsg = succMsg;
+		this.network_not_available = network_not_available;
 	}
 	
 	public void setHandleParams(MyApplication myApplication){
@@ -99,7 +109,8 @@ public class LoginThread {
 	            case 0:
 	            	commUI.dismissProgressDialog();
 	            	//if queryExistOnly 
-	            	commUI.toastShow(failureMsg);
+	            	String err = (String)msg.obj;
+	            	commUI.toastShow(err);
 	                break;
 	            }
 	    }

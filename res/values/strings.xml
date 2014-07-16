@@ -140,4 +140,9 @@
     <string name="clear_lock_by_unlock_link">通过解锁来清空手势密码</string>
     
     
+    <!-- network  -->
+    <string name="network_not_available">网络无法连接！</string>
+    
+    
+    
 </resources>

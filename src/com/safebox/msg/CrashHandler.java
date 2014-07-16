@@ -87,7 +87,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
     /** 
      * 自定义错误处理,收集错误信息 
      * 发送错误报告等操作均在此完成. 
-     * 开发者可以根据自己的情况来自定义异常处理逻辑 
+     * 可以根据自己的情况来自定义异常处理逻辑 
      * @return 
      * true代表处理该异常，不再向上抛异常，
      * false代表不处理该异常(可以将该log信息存储起来)然后交给上层(这里就到了系统的异常处理)去处理，

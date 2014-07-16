@@ -1,5 +1,7 @@
 package com.safebox.backup;
 
+import com.safebox.msg.HttpClientToServer;
+
 public class UserManager {
 	//UrlConnectionToServer urlConnectionToServer = new UrlConnectionToServer();
 	

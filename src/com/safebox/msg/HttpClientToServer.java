@@ -1,4 +1,4 @@
-package com.safebox.backup;
+package com.safebox.msg;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,8 +21,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.safebox.msg.MsgString;
-
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 public class HttpClientToServer {
@@ -155,5 +156,28 @@ public class HttpClientToServer {
 		
 	}
 	
+	
+	/**  
+     * 检测网络连接是否可用  
+     * @param ctx  
+     * @return true 可用; false 不可用  
+     */    
+    public boolean isNetworkAvailable(Context ctx) {    
+        ConnectivityManager cm =     
+            (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);    
+        if(cm == null) {    
+            return false;    
+        }    
+        NetworkInfo[] netinfo = cm.getAllNetworkInfo();    
+        if(netinfo == null) {    
+            return false;    
+        }    
+        for (int i = 0; i < netinfo.length; i++) {    
+            if(netinfo[i].isConnected()) {    
+                return true;    
+            }    
+        }    
+        return false;    
+    }    
 	
 }

@@ -8,13 +8,13 @@ import java.util.regex.Pattern;
 import com.safebox.action.LoginAction;
 import com.safebox.action.RegisterAction;
 import com.safebox.action.ShowAccountListAction;
-import com.safebox.backup.HttpClientToServer;
 import com.safebox.backup.TestByButtonActivity;
 import com.safebox.backup.TestNetworkActivity;
 import com.safebox.backup.UserManager;
 import com.safebox.bean.UserProfile;
 import com.safebox.msg.AuthorizeActivity;
 import com.safebox.msg.CommonUI;
+import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
 import com.safebox.thread.LoginThread;
@@ -65,7 +65,7 @@ public class LoginActivity extends Activity {
 	private LoginAction loginAction;
 	private UserProfile userProfile;
 	private String inproper_username_psw, type_number_char;
-	private String user_name_psw_incorrect, login_success;
+	private String user_name_psw_incorrect, login_success, network_not_available;
 	private long exitTime = 0;
 	public MyApplication myApplication;
 	private CheckBox remember_password_check = null, auto_login_check = null;
@@ -141,6 +141,8 @@ public class LoginActivity extends Activity {
 				.getString(R.string.user_name_psw_incorrect);
 		login_success = this
 				.getString(R.string.login_success);
+		network_not_available = this
+				.getString(R.string.network_not_available);
 		
 		// identify if user login, yes to show account page.
 		register_link.setClickable(true);
@@ -314,7 +316,7 @@ public class LoginActivity extends Activity {
         Log.v("validateNamePswExist password = ", psdString);
         loginThread = new LoginThread(LoginActivity.this);
         loginThread.setRunnableParams(userNameString, psdString, MsgString.PARAMS_QUERY);
-        loginThread.setHandleMsg(login_success, user_name_psw_incorrect);
+        loginThread.setHandleMsg(login_success, user_name_psw_incorrect, network_not_available);
         loginThread.setHandleUIParams(remember_password_check, commUI);
         loginThread.setHandleParams(myApplication);
         loginThread.startToRun();
