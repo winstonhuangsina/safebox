@@ -146,7 +146,6 @@ public class LockForgetByLoginActivity extends Activity {
 		@Override
 		public void run() {
 			Looper.prepare();
-			
 			usernameExist(); 
 			Looper.loop();
 		}
@@ -198,12 +197,31 @@ public class LockForgetByLoginActivity extends Activity {
 			commUI.toastShow(clean_lock_successfully);
 		}
 		if(from_setting_of_lock){
-			toNextActivity(SettingOfLockActivity.class, MsgString.FORWARD);
+			//toNextActivity(SettingOfLockActivity.class, MsgString.FORWARD);
+			toNextActivityReturnResult(SettingOfLockActivity.class, MsgString.BACKWARD);
 		}
-		toNextActivityWithIntent(LockSetupActivity.class, MsgString.FORWARD, getIntent());
+		else {
+			toNextActivityWithIntent(LockSetupActivity.class, MsgString.FORWARD, getIntent());
+		}
 		
 	}
 
+	
+	private void toNextActivityReturnResult(Class<?> nextActivity, String pending){
+		Intent intent = new Intent();
+		intent.setClass(this, nextActivity);
+		//startActivity(intent);
+		setResult(RESULT_OK, intent);  
+		if(pending.equals(MsgString.BACKWARD)){
+			overridePendingTransition(R.anim.callback_in_from_left,
+					R.anim.callback_out_to_right);
+		}else if (pending.equals(MsgString.FORWARD)){
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+		}
+		
+		finish();
+	}
+	
 	private void toNextActivity(Class<?> nextActivity, String pending){
     	Intent intent = new Intent();
 		intent.setClass(this, nextActivity);

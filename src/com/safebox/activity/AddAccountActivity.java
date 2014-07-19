@@ -41,6 +41,7 @@ public class AddAccountActivity extends Activity {
 	private String[] account_type_array = null;
 	MyApplication myApplication;
 	private SharedPreferences sp;
+	private boolean is_locked = false;
 	private CommonUI commUI;
 	private final static String ACTIVITY_NAME = MsgString.FROM_ADD_ACCOUNT;
 	private boolean from_setting_of_lock, from_add_account,
@@ -191,7 +192,14 @@ public class AddAccountActivity extends Activity {
 						intent = new Intent(getBaseContext(),
 								LockSetupActivity.class);
 						startActivityForResult(intent, 0);
-					} else {
+					} else if(checkbox_gesture_password.isChecked()
+							&& patternString != null){
+						is_locked = true;
+						addAccountInfo();
+						toNextActivity();
+					}
+					else {
+						is_locked = false;
 						addAccountInfo();
 						toNextActivity();
 					}
@@ -210,10 +218,11 @@ public class AddAccountActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (data != null) {
-			boolean is_locked = data.getBooleanExtra(MsgString.IS_LOCKED, false);
-			System.out.println("get result from locksetup activity is_locked= "
-					+ is_locked);
-			accountInfo.setIs_locked(checkbox_gesture_password.isChecked());
+			//boolean is_locked = data.getBooleanExtra(MsgString.IS_LOCKED, false);
+			/*System.out.println("get result from locksetup activity is_locked= "
+					+ is_locked);*/
+			is_locked = true;
+			//accountInfo.setIs_locked(checkbox_gesture_password.isChecked());
 			addAccountInfo();
 			toNextActivity();
 		}
@@ -261,7 +270,7 @@ public class AddAccountActivity extends Activity {
 	public void addAccountInfo() {
 		accountInfo = new AccountInfo(null, site_name_string,
 				account_name_string, account_password_string,
-				account_type_string, myApplication.getUserId());
+				account_type_string, is_locked, myApplication.getUserId());
 
 		saveAccountAction = new SaveAccountAction(accountInfo,
 				AddAccountActivity.this);

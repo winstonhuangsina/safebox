@@ -16,13 +16,17 @@ import java.util.Arrays;
 import java.util.Properties;
 import java.util.TreeSet;
 
+import com.safebox.network.FileUploadActivity;
+
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.os.Process;
 import android.util.Log;
 import android.widget.Toast;
@@ -37,13 +41,18 @@ public class CrashHandler implements UncaughtExceptionHandler {
      * */ 
     public static final boolean DEBUG = true;
 	protected static final String TAG = "CrashHandler";  
+	private static final int SUCCESS = 1;
+	private static final int FAILURE = 0;
+	
     /** 系统默认的UncaughtException处理类 */ 
     private Thread.UncaughtExceptionHandler mDefaultHandler;  
     /** CrashHandler实例 */ 
     private static CrashHandler INSTANCE;  
     /** 程序的Context对象 */ 
-//    private Context mContext;  
-    /** 保证只有一个CrashHandler实例 */ 
+    private Context mContext;  
+    /** 保证只有一个CrashHandler实例 */
+    private CommonUI commUI;
+    private DeviceInfo deviceInfo;
     private CrashHandler() {}  
     /** 获取CrashHandler实例 ,单例模式*/ 
     public static CrashHandler getInstance() {  
@@ -61,9 +70,11 @@ public class CrashHandler implements UncaughtExceptionHandler {
      * @param ctx 
      */ 
     public void init(Context ctx) {  
-//        mContext = ctx;  
+    	mContext = ctx;  
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();  
         Thread.setDefaultUncaughtExceptionHandler(this);  
+        commUI = new CommonUI(mContext);
+        deviceInfo = new DeviceInfo(mContext);
     }  
    
     /** 
@@ -99,27 +110,19 @@ public class CrashHandler implements UncaughtExceptionHandler {
         }  
 //        final String msg = ex.getLocalizedMessage();  
         final StackTraceElement[] stack = ex.getStackTrace();
-        final String message = ex.getMessage();
+        //加入设备的信息在错误信息后面
+        final String message = ex.getMessage() + deviceInfo.getDeviceInfo();;
+        System.out.print("message: " + message);
+        Log.v("message: ", message);
         //使用Toast来显示异常信息  
         new Thread() {  
             @Override 
             public void run() {  
-                Looper.prepare();  
-//                Toast.makeText(mContext, "程序出错啦:" + message, Toast.LENGTH_LONG).show();  
-//                可以只创建一个文件，以后全部往里面append然后发送，这样就会有重复的信息，个人不推荐
-                String fileName = "crash-" + System.currentTimeMillis()  + ".log";  
-                Log.v(TAG, Environment.getExternalStorageDirectory().toString());
-                File file = new File(Environment.getExternalStorageDirectory(), fileName);
-                try {
-                    FileOutputStream fos = new FileOutputStream(file,true);
-                    fos.write(message.getBytes());
-                    for (int i = 0; i < stack.length; i++) {
-                        fos.write(stack[i].toString().getBytes());
-                    }
-                    fos.flush();
-                    fos.close();
-                } catch (Exception e) {
-                }
+                Looper.prepare();
+                
+                //sendExceptionByString(message);
+                sendExceptionByFile(message, stack);
+
                 Looper.loop();  
             }  
    
@@ -127,6 +130,62 @@ public class CrashHandler implements UncaughtExceptionHandler {
         return false;  
     }  
    
+    
+
+	private void sendExceptionByFile(String message, StackTraceElement[] stack) {
+		// Toast.makeText(mContext, "程序出错啦:" + message,
+		// Toast.LENGTH_LONG).show();
+		// 可以只创建一个文件，以后全部往里面append然后发送，这样就会有重复的信息，个人不推荐
+		//String fileName = "crash-" + System.currentTimeMillis() + ".log";
+		String fileName = "crash.log";
+		Log.v(TAG, Environment.getExternalStorageDirectory().toString());
+		File file = new File(Environment.getExternalStorageDirectory(),
+				fileName);
+		try {
+			FileOutputStream fos = new FileOutputStream(file, true);
+			fos.write(message.getBytes());
+			for (int i = 0; i < stack.length; i++) {
+				fos.write(stack[i].toString().getBytes());
+			}
+			fos.flush();
+			fos.close();
+		} catch (Exception e) {
+		}
+	}
+    
+    
+    private void sendExceptionByString(String exceptionMsg){
+    	
+    	HttpClientToServer httpClientToServer = new HttpClientToServer(exceptionMsg, MsgString.PARAMS_QUERY);
+    	if(httpClientToServer.isNetworkAvailable(mContext)){
+    		String response = httpClientToServer.doPost();
+    		Log.v(" response is ", response);
+    		
+    		if (response.equals(MsgString.FAILED)) {
+    			handlerException.obtainMessage(0).sendToTarget();
+    		} else {
+    			handlerException.obtainMessage(1).sendToTarget();
+    		}
+    	}
+    	
+    }
+    
+    Handler handlerException = new Handler() {
+
+		public void handleMessage(Message msg) {// 此方法在ui线程运行
+			switch (msg.what) {
+			case SUCCESS:
+				commUI.toastShow("出错信息已发送");
+				break;
+
+			case FAILURE:
+				commUI.toastShow("出错信息未捕获");
+				break;
+			}
+		}
+	};
+    
+    
     // TODO 使用HTTP Post 发送错误报告到服务器  这里不再赘述
 //    private void postReport(File file) {  
 //      在上传的时候还可以将该app的version，该手机的机型等信息一并发送的服务器，

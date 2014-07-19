@@ -12,8 +12,10 @@ import com.safebox.action.ShowAccountListAction;
 import com.safebox.adapter.ShowAccountListAdapter;
 import com.safebox.msg.CommonUI;
 import com.safebox.msg.ExitApp;
+import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
+import com.safebox.network.UploadFile;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -77,10 +79,6 @@ public class ShowAccountListActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(null != savedInstanceState){
-			System.out.println("#########showaccount list savedInstanceState ################");
-
-		}
 		
 		setContentView(R.layout.testlistview);
 		logout_success = this.getString(R.string.logout_success);
@@ -96,6 +94,21 @@ public class ShowAccountListActivity extends Activity{
 		clickToEdit();
 	}
 
+	@Override
+	public void onResume(){
+		super.onResume();
+		uploadFile();
+		//System.out.println("#########onResume() = "+getRunningActivityName());
+	}
+	
+	private void uploadFile(){
+		UploadFile uploadFile = new UploadFile(this);
+		HttpClientToServer httpClientToServer = new HttpClientToServer();
+		if(httpClientToServer.isNetworkAvailable(this)){
+			uploadFile.upload();
+		}
+	}
+	
 	
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
@@ -300,42 +313,36 @@ public class ShowAccountListActivity extends Activity{
 		
 		showAccountListAction = new ShowAccountListAction(
 				ShowAccountListActivity.this);
-		
-		//System.out.println("######## ShowAccountListActivity  getAccountList() before  query() user id = " + myApplication.getUserId());
 		List<Map<String, Object>> list = showAccountListAction.query(myApplication.getUserId());
-		
-		//System.out.println("######## ShowAccountListActivity  getAccountList() after  query() #####");
 		for(int i = 0; i < list.size(); i++){
 			Map<String, Object> map = (Map<String, Object>) list.get(i);
 			String account_id = (String) map.get(MsgString.ACCOUNT_ID);
+			Log.v("show acount list activity account id = ", account_id);
 			String account_name = (String) map.get(MsgString.ACCOUNT_NAME);
 			String account_password = (String) map.get(MsgString.ACCOUNT_PASSWORD);
 			String account_type = (String) map.get(MsgString.ACCOUNT_TYPE);
 			String site_name = (String) map.get(MsgString.SITE_NAME);
 			String is_locked = (String) map.get(MsgString.IS_LOCKED);
+			//默认先设is_locked 为false, 后面再判断。
+			AccountInfo accountInfo = new AccountInfo(account_id, site_name, account_name, account_password, account_type, false, myApplication.getUserId());
+			
 			if(null!= account_type && !account_type.equals(diff_type)){
 				//additemType
-				//System.out.println("######## ShowAccountListActivity  getAccountList() add item type #####");
-				AccountInfo accountInfo = new AccountInfo(account_id, site_name, account_name, account_password, account_type, myApplication.getUserId());
-				AccountLayoutBean layoutBean = new AccountLayoutBean(accountInfo, "type");
+				AccountLayoutBean layoutBean = new AccountLayoutBean(accountInfo, MsgString.SHOW_ACCOUNT_TYPE);
 				accountList.add(layoutBean);
 				diff_type = account_type;
 				i--;
 			}else{
 				//additem
-				//System.out.println("######## ShowAccountListActivity  getAccountList() add item #####");
-				AccountInfo accountInfo = new AccountInfo(account_id, site_name, account_name, account_password, account_type, myApplication.getUserId());
-				if(is_locked.equals("1"))
+				//AccountInfo accountInfo = new AccountInfo(account_id, site_name, account_name, account_password, account_type, myApplication.getUserId());
+				if(is_locked.equals(MsgString.IS_LOCK_TRUE))
 					accountInfo.setIs_locked(true);
 				else 
 					accountInfo.setIs_locked(false);
-				AccountLayoutBean layoutBean = new AccountLayoutBean(accountInfo, "item");
+				AccountLayoutBean layoutBean = new AccountLayoutBean(accountInfo, MsgString.SHOW_ACCOUNT_ITEM);
 				accountList.add(layoutBean);
 			}
-			
-			
 		}
-		
 		return accountList;
 	}
 	

@@ -25,7 +25,7 @@ import com.safebox.msg.MyApplication;
 public class LoginThread {
 
 	ProgressDialog progressDialog;
-	String username, password, action, failureMsg, succMsg, network_not_available;
+	String username, password, action, user_name_psw_incorrect, succMsg, network_not_available, network_exception;
 	String user_id_from_query;
 	Context context;
 	boolean queryRomoteDBResult = false;
@@ -33,6 +33,9 @@ public class LoginThread {
 	MyApplication myApplication;
 	private SharedPreferences sp;
 	CheckBox remember_password_check;
+	private static final int SUCCESS = 1;
+	private static final int FAILURE = 0;
+	
 	//private LoginAction loginAction;
 	
 	public LoginThread(Context context){
@@ -66,23 +69,26 @@ public class LoginThread {
 				String response = httpClientToServer.doPost();
 				Log.v("response is ", response);
 				if (response.equals(MsgString.FAILED)) {
-					handler.obtainMessage(0, failureMsg).sendToTarget();
-				} else {
-					handler.obtainMessage(1, response).sendToTarget();
+					handler.obtainMessage(FAILURE, user_name_psw_incorrect).sendToTarget();
+				}else if(response.equals(MsgString.DO_POST_CONN_EXCEPTION)){
+					handler.obtainMessage(FAILURE, network_exception).sendToTarget();
+				}else {
+					handler.obtainMessage(SUCCESS, response).sendToTarget();
 					//handler.obtainMessage(1, ).sendToTarget();
 				}
 			}else{
-				handler.obtainMessage(0, network_not_available).sendToTarget();
+				handler.obtainMessage(FAILURE, network_not_available).sendToTarget();
 			}
 			
 			Looper.loop();
 		}
 	  };
 		
-	public void setHandleMsg(String succMsg, String failureMsg, String network_not_available){
-		this.failureMsg = failureMsg;
+	public void setHandleMsg(String succMsg, String user_name_psw_incorrect, String network_not_available, String network_exception){
+		this.user_name_psw_incorrect = user_name_psw_incorrect;
 		this.succMsg = succMsg;
 		this.network_not_available = network_not_available;
+		this.network_exception = network_exception;
 	}
 	
 	public void setHandleParams(MyApplication myApplication){
@@ -99,14 +105,14 @@ public class LoginThread {
 	    	
 	    	public void handleMessage (Message msg) {//此方法在ui线程运行
 	            switch(msg.what) {
-	            case 1:
+	            case SUCCESS:
 	            	commUI.dismissProgressDialog();
 	            	//commUI.toastShow(succMsg);
 	            	user_id_from_query = (String)msg.obj;
 	            	saveValueAndToListActivity();
 	                break;
 
-	            case 0:
+	            case FAILURE:
 	            	commUI.dismissProgressDialog();
 	            	//if queryExistOnly 
 	            	String err = (String)msg.obj;
@@ -147,6 +153,7 @@ public class LoginThread {
 	private int getUserId() {
 		
 		return Integer.valueOf(user_id_from_query);
+		//return Integer.valueOf("--");
 		//return loginAction.getUserId(username, password);
 	}
 	

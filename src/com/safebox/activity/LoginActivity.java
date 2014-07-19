@@ -17,6 +17,7 @@ import com.safebox.msg.CommonUI;
 import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
+import com.safebox.network.UploadFile;
 import com.safebox.thread.LoginThread;
 
 import intent.pack.R;
@@ -65,7 +66,7 @@ public class LoginActivity extends Activity {
 	private LoginAction loginAction;
 	private UserProfile userProfile;
 	private String inproper_username_psw, type_number_char;
-	private String user_name_psw_incorrect, login_success, network_not_available;
+	private String user_name_psw_incorrect, login_success, network_not_available, network_exception;
 	private long exitTime = 0;
 	public MyApplication myApplication;
 	private CheckBox remember_password_check = null, auto_login_check = null;
@@ -143,6 +144,7 @@ public class LoginActivity extends Activity {
 				.getString(R.string.login_success);
 		network_not_available = this
 				.getString(R.string.network_not_available);
+		network_exception = this.getString(R.string.network_exception);
 		
 		// identify if user login, yes to show account page.
 		register_link.setClickable(true);
@@ -151,6 +153,7 @@ public class LoginActivity extends Activity {
 		//weibo_login.setOnClickListener(listener);
 	}
 
+	
 	private void autoLoginAndRememberPsw() {
 		sp = this.getSharedPreferences("userInfo", MODE_PRIVATE); 
 		 //判断记住密码多选框的状态  
@@ -316,7 +319,7 @@ public class LoginActivity extends Activity {
         Log.v("validateNamePswExist password = ", psdString);
         loginThread = new LoginThread(LoginActivity.this);
         loginThread.setRunnableParams(userNameString, psdString, MsgString.PARAMS_QUERY);
-        loginThread.setHandleMsg(login_success, user_name_psw_incorrect, network_not_available);
+        loginThread.setHandleMsg(login_success, user_name_psw_incorrect, network_not_available, network_exception);
         loginThread.setHandleUIParams(remember_password_check, commUI);
         loginThread.setHandleParams(myApplication);
         loginThread.startToRun();

@@ -13,8 +13,11 @@ import com.safebox.backup.TestShowAccountListActivity;
 import com.safebox.bean.AccountInfo;
 import com.safebox.bean.Person;
 import com.safebox.bean.UserProfile;
+import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
+import com.safebox.network.FileUploadActivity;
+import com.safebox.network.UploadFile;
 
 import intent.pack.R;
 import android.os.Bundle;
@@ -31,6 +34,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -60,6 +64,7 @@ public class SaveAccountActivity extends Activity {
 	private String[] account_type_array = null; 
 	MyApplication myApplication;
 	private SharedPreferences sp;
+	boolean is_locked = false;
 	
 	private final static String ACTIVITY_NAME = MsgString.FROM_SAVE_ACCOUNT;
 	private boolean from_setting_of_lock, from_add_account, from_show_account_list, from_save_account, from_unlock;
@@ -80,10 +85,9 @@ public class SaveAccountActivity extends Activity {
 			setAccountInfoOnTextEdit();
 		}
 		accountTypeSpin();
-		clickToSetLock();
-		clickToSaveAccountInfo();
-		del_account = (Button) findViewById(R.id.del_account);
-		clickToDelAccount();
+		
+		//clickToSaveAccountInfo();
+		//clickToDelAccount();
 	}
 	
 	private void initial(){
@@ -93,8 +97,11 @@ public class SaveAccountActivity extends Activity {
 		account_password = (EditText) findViewById(R.id.account_password);
 		site_name = (EditText) findViewById(R.id.site_name);
 		save_account = (Button) findViewById(R.id.save_account);
+		del_account = (Button) findViewById(R.id.del_account);
 		checkbox_gesture_password = (CheckBox) findViewById(R.id.checkbox_gesture_password);
 		account_info_imcomplete = this.getString(R.string.account_info_imcomplete);
+		save_account.setOnClickListener(listener);
+		del_account.setOnClickListener(listener);
 	}
 	
 	
@@ -125,36 +132,6 @@ private String getRunningActivityName(){
     }
 	
 
-
-	@Override
-	public void  onStart(){
-		super.onStart();
-		System.out.println("#########onStart() = "+getRunningActivityName());
-	}
-	@Override
-	public void onRestart(){
-		super.onRestart();
-		System.out.println("#########OnRestart() = "+getRunningActivityName());
-	}
-	
-	@Override
-	public void onResume(){
-		super.onResume();
-		System.out.println("#########onResume() = "+getRunningActivityName());
-	}
-	
-	@Override
-	public void onStop(){
-		super.onStop();
-		System.out.println("#########onStop() = "+getRunningActivityName());
-	}
-	
-	@Override
-	public void onDestroy(){
-		super.onDestroy();
-		System.out.println("#########onDestroy() = "+getRunningActivityName());
-	}
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//Intent intent = new Intent();
@@ -231,16 +208,17 @@ private String getRunningActivityName(){
 	private void setAccountInfoOnTextEdit(){
 		if (getIntent().getExtras() != null) {
 			Bundle extras = getIntent().getExtras();
-			Log.v("in SaveAccountInfoActivity, come to setAccountInfoOnTextEdit() now ",
-					"extras is not Empty");
+			
 			String site_name_bundle = extras.getString(MsgString.SITE_NAME);
 			String account_name_bundle = extras.getString(MsgString.ACCOUNT_NAME);
 			String account_password_bundle = extras
 					.getString(MsgString.ACCOUNT_PASSWORD);
 			boolean is_locked_bundle = extras.getBoolean(MsgString.IS_LOCKED);
+			is_locked = is_locked_bundle;
 			account_id_string = extras
 					.getString(MsgString.ACCOUNT_ID);
-
+			Log.v("in SaveAccountInfoActivity, come to setAccountInfoOnTextEdit() account_id_string = ",
+					account_id_string);
 			if (null != account_name_bundle)
 				account_name.setText(account_name_bundle);
 			if(is_locked_bundle)
@@ -250,6 +228,7 @@ private String getRunningActivityName(){
 			if(null != site_name_bundle){
 				site_name.setText(site_name_bundle);
 			}
+			clickToSetLock();
 		}
 	}
 	
@@ -260,25 +239,25 @@ private String getRunningActivityName(){
 	    return list.size() > 0;
 	}
 	
-	private void clickToSaveAccountInfo(){
-		save_account.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+	
+	private OnClickListener listener = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.save_account:
+
 				if (validateAccountInfo()) {
 					// pass context to the next activity.
 					// it is to edit the account then save the change.
-					if(accountInfo.getIs_locked()){
-						/*SharedPreferences preferences = getSharedPreferences(MsgString.GESTURE_LOCK,
-				                MODE_PRIVATE);
-				        String patternString = preferences.getString(MsgString.GESTURE_LOCK_KEY,
-				                null);*/
+					if(is_locked){
 						
 						SharedPreferences preferences = getSharedPreferences(myApplication.getGuestureLockKey(),
 				                MODE_PRIVATE);
 				        String patternString = preferences.getString(myApplication.getGuestureLockKey(),
 				                null);
 				        if (patternString == null) {
-				        	Log.v(ACTIVITY_NAME, "NO lock patter");
+				        	Log.v(ACTIVITY_NAME, "NO lock pattern");
 				        	ToNextActivityWithValueReturn(LockSetupActivity.class, 0);
 				        	return;
 				        }else{
@@ -295,10 +274,21 @@ private String getRunningActivityName(){
 				}else{
 					MsgString.toastShow(getBaseContext(),account_info_imcomplete);
 				}
+			
+				break;
+			case R.id.del_account:
+				Log.v("in SaveAccountInfoActivity, come to clickToDelAccountInfo() now del account id =",
+						account_id_string);
+				if (null != account_id_string) {
+					delAccountInfoById();
+					toNextActivity(ShowAccountListActivity.class, MsgString.BACKWARD);
+				}
+				
+			default:
+				break;
 			}
-		});
-	}
-	
+		}
+	};
 	
 	 @Override 
 	    /**
@@ -307,9 +297,6 @@ private String getRunningActivityName(){
 	    protected void onActivityResult(int requestCode, int resultCode, Intent data) { 
 	        super.onActivityResult(requestCode, resultCode, data); 
 	        if(resultCode == Activity.RESULT_OK && data != null){  
-				//boolean is_locked = data.getBooleanExtra(IS_LOCKED, false);
-				//System.out.println("get result from locksetup activity is_locked= " + is_locked);
-				//accountInfo.setIs_locked(checkbox_gesture_password.isChecked());
 				updateAccountInfo();
 				toNextActivity(ShowAccountListActivity.class, MsgString.BACKWARD);
 			} 
@@ -320,36 +307,17 @@ private String getRunningActivityName(){
 		checkbox_gesture_password.setOnCheckedChangeListener(new OnCheckedChangeListener() {  
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {  
                 if (checkbox_gesture_password.isChecked()) {  
-                	accountInfo.setIs_locked(true);  
+                	accountInfo.setIs_locked(true);
+                	is_locked = true;
                 }else {  
                 	accountInfo.setIs_locked(false);
+                	is_locked = false;
                 }  
   
             }  
         });
 	}
-	
-	private void clickToDelAccount(){
 
-		del_account.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.v("in SaveAccountInfoActivity, come to clickToDelAccountInfo() now del account id =",
-						account_id_string);
-				if (null != account_id_string) {
-					delAccountInfoById();
-					Intent intent = new Intent();
-					// intent.putExtra("account_name", account_name_string);
-					intent.setClass(SaveAccountActivity.this,
-							ShowAccountListActivity.class);
-					startActivity(intent);
-				}
-			}
-		});
-	
-		
-	}
-	
 	private boolean validateAccountInfo(){
 		
 		if(null != site_name.getText())
@@ -381,8 +349,8 @@ private String getRunningActivityName(){
 	
 	public void updateAccountInfo(){
 		accountInfo = new AccountInfo(account_id_string, site_name_string, account_name_string,
-				account_password_string, account_type_string, myApplication.getUserId());
-		accountInfo.setIs_locked(checkbox_gesture_password.isChecked());
+				account_password_string, account_type_string, is_locked, myApplication.getUserId());
+		//accountInfo.setIs_locked(checkbox_gesture_password.isChecked());
 		saveAccountAction = new SaveAccountAction(accountInfo,
 				SaveAccountActivity.this);
 		saveAccountAction.updateAccountInfo();
@@ -452,18 +420,5 @@ private String getRunningActivityName(){
 				lastActivity = ShowAccountListActivity.class;
 		}
 	}
-	
-	/*@Override
-    public void onBackPressed() {
-    	// 仅适用于2.0或更新版的sdk
-		if(from_unlock){
-			toNextActivity(ShowAccountListActivity.class, MsgString.BACKWARD);
-			return;
-		}
-    	toNextActivity(backToLastActivity(), MsgString.BACKWARD);
-    }
-	 private Class<?> backToLastActivity(){
-	    	return lastActivity;
-	}*/
 	
 }

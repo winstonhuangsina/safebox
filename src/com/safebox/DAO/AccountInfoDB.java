@@ -24,23 +24,17 @@ public class AccountInfoDB {
 	EncryptService encryptService = new EncryptService();
 	
 	public AccountInfoDB(Context context) {
-		// TODO Auto-generated constructor stub
 		dbHelper = new PublicSQLiteHelper(context);
 		
 	}
 
 	
-	public List<Map<String, Object>> selectby(int user_id) {
+	public List<Map<String, Object>> selectby(Integer user_id) {
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		String where = MsgString.USER_ID + " = ?";
-		String[] whereValue = {"2"};
-		//System.out.println("######## AccountInfoDB  selectBy() user id = " + user_id);
-		//TODO ??
-		//Cursor cs=db.rawQuery("select * from " + MsgString.ACCOUNT_INFO_TABLE + " where user_id =? " ,new String[]{Integer.toString(user_id)} );
-		//Cursor cs=db.rawQuery("select * from account_info_table where user_id = ?", new String[]{"1"} );
-		Cursor cs = db.query(MsgString.ACCOUNT_INFO_TABLE, null, null, null, null, null, MsgString.ACCOUNT_TYPE);
-		//System.out.println("######## AccountInfoDB  selectBy() ##### getCount() = "+cs.getCount());
+		
+		Cursor cs = db.rawQuery("select * from account_info_table where user_id = ? ", new String[]{user_id.toString()});  
+		
 		String decrypt_username = null, decrypt_password = null;
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		while (cs.moveToNext()){
@@ -84,8 +78,8 @@ public class AccountInfoDB {
 		cv.put(MsgString.ACCOUNT_PASSWORD, encrypt_password);
 		cv.put(MsgString.ACCOUNT_TYPE, account_type);
 		cv.put(MsgString.SITE_NAME, site_name);
-		cv.put(MsgString.IS_LOCKED, is_locked);
-		cv.put(MsgString.USER_ID, user_id);
+		cv.put(MsgString.IS_LOCKED, String.valueOf(is_locked));
+		cv.put(MsgString.USER_ID, String.valueOf(user_id));
 		long row = db.insert(MsgString.ACCOUNT_INFO_TABLE, null, cv);
 		if(db.isOpen())
 			db.close();
@@ -94,7 +88,7 @@ public class AccountInfoDB {
 
 	// É¾³ý²Ù×÷
 	public void delete(String id) {
-		Log.v("AccountInfoDB delete", MsgString.ACCOUNT_INFO_TABLE);
+		Log.v("AccountInfoDB delete id = ", id);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		String where = MsgString.ACCOUNT_ID + " = ?";
 		String[] whereValue = { id };
@@ -121,7 +115,7 @@ public class AccountInfoDB {
 		cv.put(MsgString.ACCOUNT_PASSWORD, encrypt_password);
 		cv.put(MsgString.ACCOUNT_TYPE, account_type);
 		cv.put(MsgString.SITE_NAME, site_name);
-		cv.put(MsgString.IS_LOCKED, is_locked);
+		cv.put(MsgString.IS_LOCKED, String.valueOf(is_locked));
 		db.update(MsgString.ACCOUNT_INFO_TABLE, cv, where, whereValue);
 		if(db.isOpen())
 			db.close();

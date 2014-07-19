@@ -9,13 +9,14 @@ public class AccountInfo {
 	public AccountInfo(){
 	}
 	
-	public AccountInfo(String account_id, String site_name, String account_name, String account_password, String account_type, int user_id){
+	public AccountInfo(String account_id, String site_name, String account_name, String account_password, String account_type, boolean is_locked, int user_id){
 		this.account_id = account_id;
 		this.site_name = site_name;
 		this.account_name = account_name;
 		this.account_password = account_password;
 		this.account_type = account_type;
 		this.user_id = user_id;
+		this.is_locked = is_locked;
 	}
 	/*public AccountInfo(String account_id, String site_name, String account_name, String account_password, String account_type){
 		this.account_id = account_id;

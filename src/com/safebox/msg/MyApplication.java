@@ -3,6 +3,8 @@ package com.safebox.msg;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.safebox.network.UploadFile;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -74,6 +76,8 @@ public class MyApplication extends Application {
 		crashHandler.init(getApplicationContext()); 
 		//发送以前没发送的报告(可选) 
 		//crashHandler.sendPreviousReportsToServer(); 
+		
+		
 		
 	}
 	

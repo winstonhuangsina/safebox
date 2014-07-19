@@ -31,6 +31,13 @@ public class MsgString {
 	public final static String USERNAME_LOGIN = "USERNAME_LOGIN";
 	public final static String PASSWORD_LOGIN = "PASSWORD_LOGIN";
 	
+	//Show account list activity
+	public final static String IS_LOCK_TRUE = "true";
+	public final static String IS_LOCK_FALSE = "false";
+	public final static String SHOW_ACCOUNT_TYPE = "type";
+	public final static String SHOW_ACCOUNT_ITEM = "item";
+	
+	
 	// Gesture lock
 	public final static String GESTURE_LOCK = "GESTURE_LOCK";
 	public final static String GESTURE_UNLOCK = "GESTURE_UNLOCK";
@@ -55,15 +62,17 @@ public class MsgString {
 	
 	
 	//URL on HttpClientToServer
-	public final static boolean LOCAL_SERVER_URL_TRIGGER = false;
+	public final static boolean LOCAL_SERVER_URL_TRIGGER = true;
 	public final static String LOCAL_SERVER_URL = "http://10.0.2.2:8080/servertest/login.do";
 	public final static String REMOTE_SERVER_URL = "http://mysafeboxgit.duapp.com/login.do";
 	
 	public final static String PARAMS_USERNAME = "PARAMS_USERNAME";
 	public final static String PARAMS_PASSWORD = "PARAMS_PASSWORD";
+	public final static String PARAMS_EXCEPTION = "PARAMS_EXCEPTION";
 	public final static String PARAMS_ACTION = "PARAMS_ACTION";
 	public final static String PARAMS_QUERY = "PARAMS_QUERY";
 	public final static String PARAMS_INSERT = "PARAMS_INSERT";
+	public final static String PARAMS_SEND_EXCEPTION = "PARAMS_SEND_EXCEPTION";
 	
 	public final static String SUCCESS = "SUCCESS";
 	public final static String FAILED = "FAILED";
@@ -71,6 +80,12 @@ public class MsgString {
 	public final static String PARAMS_LOCATION = "PARAMS_LOCATION";
 	public final static String PARAMS_DEVICE = "PARAMS_DEVICE";
 	
+	
+	//Upload exception file to server
+	public final static String UPLOAD_FILE_URL =  "http://10.0.2.2:8080/servertest/UploadServlet";
+	
+	
+	public final static String DO_POST_CONN_EXCEPTION = "exception";
 	//Shared Preferences
 	
 	//

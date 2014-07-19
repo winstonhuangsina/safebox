@@ -45,6 +45,13 @@ public class HttpClientToServer {
 		listOfParams.add(new BasicNameValuePair(MsgString.PARAMS_ACTION, action));
 	}
 	
+	public HttpClientToServer(String exception, String action){
+		initialServerURL();
+		listOfParams.add(new BasicNameValuePair(MsgString.PARAMS_EXCEPTION, exception));
+		listOfParams.add(new BasicNameValuePair(MsgString.PARAMS_ACTION, action));
+	}
+	
+	
 	public void setLocation(String location){
 		listOfParams.add(new BasicNameValuePair(MsgString.PARAMS_LOCATION, location));
 	}
@@ -147,11 +154,11 @@ public class HttpClientToServer {
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "exception";
+			return MsgString.DO_POST_CONN_EXCEPTION;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "exception";
+			return MsgString.DO_POST_CONN_EXCEPTION;
 		}
 		
 	}

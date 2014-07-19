@@ -117,6 +117,9 @@
     <string name="lockscreen_access_pattern_cell_added">Cell added</string>
     <string name="lockscreen_access_pattern_detected">Pattern completed</string>
     <string name="lockpattern_forget"><a href="#">忘记手势密码</a></string>
+    <string name="lockpattern_clean_successfully">手势密码已成功清除</string>
+    
+    
 	
     <!-- forget lock pattern, reset by login -->
       <string name="lock_forget_login">Login</string>
@@ -142,6 +145,7 @@
     
     <!-- network  -->
     <string name="network_not_available">网络无法连接！</string>
+    <string name="network_exception">网络连接异常，请检查网络设置！</string>
     
     
     

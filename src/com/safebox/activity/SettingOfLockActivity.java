@@ -25,6 +25,7 @@ import com.safebox.msg.AuthorizeActivity;
 import com.safebox.msg.DeviceLocation;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
+import com.safebox.network.FileUploadActivity;
 
 public class SettingOfLockActivity  extends Activity {
 
@@ -95,13 +96,13 @@ private String getRunningActivityName(){
 	private void initial() {
 		clear_lock_button = (Button) findViewById(R.id.clear_lock_button);
 		reset_lock_button = (Button) findViewById(R.id.reset_lock_button);
-		/*test_authorize_button = (Button) findViewById(R.id.test_authorize_button);
-		test_button = (Button) findViewById(R.id.test_button);*/
+		//test_authorize_button = (Button) findViewById(R.id.test_authorize_button);
+		test_button = (Button) findViewById(R.id.test_button);
 		//login();
 		clear_lock_button.setOnClickListener(listener);
 		reset_lock_button.setOnClickListener(listener);
-		/*test_button.setOnClickListener(listener);
-		test_authorize_button.setOnClickListener(listener);*/
+		test_button.setOnClickListener(listener);
+		//test_authorize_button.setOnClickListener(listener);
 		
 		set_lock_text = this.getString(R.string.set_lock_pattern);
 		clear_lock_text = this.getString(R.string.clear_lock_pattern);
@@ -180,10 +181,11 @@ private String getRunningActivityName(){
 			case R.id.reset_lock_button:
 				toNextActivity(UnLockActivity.class, MsgString.FORWARD);
 				break;
-			/*case R.id.test_button:
-					toNextActivity(DeviceLocation.class, MsgString.FORWARD);
+			case R.id.test_button:
+					//toNextActivity(DeviceLocation.class, MsgString.FORWARD);
+				toNextActivity(FileUploadActivity.class, MsgString.FORWARD);
 				break;
-			case R.id.test_authorize_button:
+			/*case R.id.test_authorize_button:
 					toNextActivity(AuthorizeActivity.class, MsgString.FORWARD);
 				break;*/
 			default:
@@ -208,7 +210,7 @@ private String getRunningActivityName(){
 	private void ToNextActivityWithValueReturn(Class<?> nextActivity, int requestCode){
 		Intent intent = new Intent(this,
 				nextActivity);
-		intent.putExtra(ACTIVITY_NAME, ACTIVITY_NAME);
+		intent.putExtra(MsgString.FROM_SETTING_OF_LOCK, MsgString.FROM_SETTING_OF_LOCK);
 		startActivityForResult(intent, requestCode);
 	}
 	
@@ -216,7 +218,7 @@ private String getRunningActivityName(){
 	
 	private void toNextActivity(Class<?> nextActivity, String pending){
     	Intent intent = new Intent();
-    	intent.putExtra(ACTIVITY_NAME, ACTIVITY_NAME);
+    	intent.putExtra(MsgString.FROM_SETTING_OF_LOCK, MsgString.FROM_SETTING_OF_LOCK);
 		intent.setClass(this, nextActivity);
 		startActivity(intent);
 		if(pending.equals(MsgString.BACKWARD)){

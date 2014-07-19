@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.safebox.action.LoginAction;
 import com.safebox.bean.UserProfile;
+import com.safebox.msg.CommonUI;
 import com.safebox.msg.LockPatternView;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
@@ -31,10 +32,11 @@ import android.widget.Toast;
 public class UnLockActivity extends Activity implements
         LockPatternView.OnPatternListener {
     private static final String TAG = "LockActivity";
-
+    private String lockpattern_clean_successfully;
     private List<Cell> lockPattern;
     private LockPatternView lockPatternView;
     SharedPreferences sp;
+    CommonUI commUI;
     private MyApplication myApplication;
     private boolean from_add_account, from_show_account_list, from_save_account, from_unlock, from_setting_of_lock;
     private String ACTIVITY_NAME = MsgString.FROM_UNLOCK;
@@ -57,7 +59,7 @@ public class UnLockActivity extends Activity implements
             return;
         }
         lockPattern = LockPatternView.stringToPattern(patternString);
-        
+        commUI = new CommonUI(this);
         lockPatternView = (LockPatternView) findViewById(R.id.lock_pattern);
         lockPatternView.setOnPatternListener(this);
         TextView unlock_cancel = (TextView) findViewById(R.id.unlock_cancel_link);
@@ -69,6 +71,8 @@ public class UnLockActivity extends Activity implements
     	lockpattern_forget.setOnClickListener(listener);
     	TextView lockpattern_old_lock = (TextView) findViewById(R.id.enter_lock_pattern);
     	String enter_old_lock = this.getString(R.string.enter_old_lock_pattern);
+    	lockpattern_clean_successfully  = this.getString(R.string.lockpattern_clean_successfully);
+    	
     	if(from_setting_of_lock)
     		lockpattern_old_lock.setText(enter_old_lock);
     	sp = this.getSharedPreferences("userInfo", MODE_PRIVATE);
@@ -211,8 +215,7 @@ private String getRunningActivityName(){
 					.commit();
 			String patternString = preferences.getString(myApplication.getGuestureLockKey(), null);
 			if (patternString == null) {
-				MsgString.toastShow(getBaseContext(),
-						"clean the lock pattern sucessfully");
+				commUI.toastShow(lockpattern_clean_successfully);
 			}
 			toNextActivity(LockSetupActivity.class, MsgString.FORWARD);
 		}else if(from_show_account_list){
