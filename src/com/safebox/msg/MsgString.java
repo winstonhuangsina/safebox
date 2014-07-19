@@ -62,7 +62,7 @@ public class MsgString {
 	
 	
 	//URL on HttpClientToServer
-	public final static boolean LOCAL_SERVER_URL_TRIGGER = true;
+	public final static boolean LOCAL_SERVER_URL_TRIGGER = false;
 	public final static String LOCAL_SERVER_URL = "http://10.0.2.2:8080/servertest/login.do";
 	public final static String REMOTE_SERVER_URL = "http://mysafeboxgit.duapp.com/login.do";
 	
