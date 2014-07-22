@@ -12,7 +12,10 @@
             android:id="@+id/lock_account_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/locked"
             android:contentDescription="@string/lock_account_icon" />
 
@@ -20,9 +23,9 @@
             android:id="@+id/site_name_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@id/lock_account_icon"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="18dp"
             android:textSize="22sp" />
 
 

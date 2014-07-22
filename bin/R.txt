@@ -347,7 +347,7 @@ int id action_menu_divider 0x7f090016
 int id action_menu_presenter 0x7f090017
 int id action_mode_close_button 0x7f090024
 int id activity_chooser_view_content 0x7f090025
-int id add_account 0x7f090089
+int id add_account 0x7f090088
 int id always 0x7f09000b
 int id author 0x7f090078
 int id authorize_button 0x7f090047
@@ -411,7 +411,7 @@ int id login_password_label 0x7f090052
 int id login_user_label 0x7f090050
 int id login_username_input 0x7f090051
 int id logout 0x7f09008b
-int id menu_settings 0x7f090088
+int id menu_settings 0x7f090089
 int id menu_share 0x7f09008a
 int id middle 0x7f090012
 int id myButton 0x7f090082
