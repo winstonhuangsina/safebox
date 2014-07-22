@@ -47,6 +47,7 @@ public class UnLockActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unlock);
         myApplication = (MyApplication) this.getApplication();
+		myApplication.addActivity(this);
         identifyFromWhichActivity();
         SharedPreferences preferences = getSharedPreferences(myApplication.getGuestureLockKey(), MODE_PRIVATE);
         String patternString = preferences.getString(myApplication.getGuestureLockKey(),
@@ -75,7 +76,7 @@ public class UnLockActivity extends Activity implements
     	
     	if(from_setting_of_lock)
     		lockpattern_old_lock.setText(enter_old_lock);
-    	sp = this.getSharedPreferences("userInfo", MODE_PRIVATE);
+    	sp = this.getSharedPreferences(MsgString.LOGIN_SHARED_PREFERENCE, MODE_PRIVATE);
     	
     }
     
@@ -89,30 +90,30 @@ private String getRunningActivityName(){
 	@Override
 	public void  onStart(){
 		super.onStart();
-		System.out.println("#########onStart() = "+getRunningActivityName());
+		//System.out.println("#########onStart() = "+getRunningActivityName());
 	}
 	@Override
 	public void onRestart(){
 		super.onRestart();
-		System.out.println("#########OnRestart() = "+getRunningActivityName());
+		//System.out.println("#########OnRestart() = "+getRunningActivityName());
 	}
 	
 	@Override
 	public void onResume(){
 		super.onResume();
-		System.out.println("#########onResume() = "+getRunningActivityName());
+		//System.out.println("#########onResume() = "+getRunningActivityName());
 	}
 	
 	@Override
 	public void onStop(){
 		super.onStop();
-		System.out.println("#########onStop() = "+getRunningActivityName());
+		//System.out.println("#########onStop() = "+getRunningActivityName());
 	}
 	
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
-		System.out.println("#########onDestroy() = "+getRunningActivityName());
+		//System.out.println("#########onDestroy() = "+getRunningActivityName());
 	}
 
     @Override

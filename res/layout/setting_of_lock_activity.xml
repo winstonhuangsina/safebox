@@ -19,11 +19,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/turn_off_lock_pattern" /> -->
-   <Button
+   <!-- <Button
         android:id="@+id/test_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="测试按钮" />
+        android:text="测试按钮" /> -->
  <!--     <Button
         android:id="@+id/test_authorize_button"
         android:layout_width="fill_parent"

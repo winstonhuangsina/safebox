@@ -25,13 +25,6 @@
             android:layout_marginLeft="12dp"
             android:textSize="22sp" />
 
-        <!--
-             <TextView
-            android:id="@+id/account_password_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22sp" />
-        -->
 
         <ImageView
             android:id="@+id/img_list"
@@ -50,8 +43,7 @@
         android:layout_height="20dip"
         android:background="#797979"
         android:orientation="horizontal"
-        android:visibility="gone" > <!-- 通过这个来控件要不要分隔 -->
-    >
+        android:visibility="gone" >
     </LinearLayout>
 
 </LinearLayout>

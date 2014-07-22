@@ -13,6 +13,7 @@ import com.safebox.backup.TestShowAccountListActivity;
 import com.safebox.bean.AccountInfo;
 import com.safebox.bean.Person;
 import com.safebox.bean.UserProfile;
+import com.safebox.msg.CommonUI;
 import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
@@ -55,7 +56,7 @@ public class SaveAccountActivity extends Activity {
 	private EditText account_name, account_password, site_name;
 	private Button save_account, del_account;
 	private CheckBox checkbox_gesture_password = null;
-	private String site_name_string, account_name_string, account_password_string, account_type_string, account_info_imcomplete, spin_account_type_hint;
+	private String site_name_string, account_name_string, account_password_string, account_type_string, account_info_imcomplete, spin_account_type_hint, same_lock_as_before;
 	private String account_id_string;
 	private SaveAccountAction saveAccountAction;
 	private AccountInfo accountInfo = new AccountInfo();
@@ -64,6 +65,7 @@ public class SaveAccountActivity extends Activity {
 	private String[] account_type_array = null; 
 	MyApplication myApplication;
 	private SharedPreferences sp;
+	CommonUI commUI;
 	boolean is_locked = false;
 	
 	private final static String ACTIVITY_NAME = MsgString.FROM_SAVE_ACCOUNT;
@@ -73,10 +75,6 @@ public class SaveAccountActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(null != savedInstanceState){
-			System.out.println("#########save account savedInstanceState ################");
-
-		}
 		setContentView(R.layout.saveaccount);
 		identifyFromWhichActivity();
 		initial();
@@ -91,6 +89,7 @@ public class SaveAccountActivity extends Activity {
 	}
 	
 	private void initial(){
+		commUI = new CommonUI(this);
 		myApplication = (MyApplication) this.getApplication();
 		myApplication.addActivity(this);
 		account_name = (EditText) findViewById(R.id.account_name);
@@ -100,6 +99,7 @@ public class SaveAccountActivity extends Activity {
 		del_account = (Button) findViewById(R.id.del_account);
 		checkbox_gesture_password = (CheckBox) findViewById(R.id.checkbox_gesture_password);
 		account_info_imcomplete = this.getString(R.string.account_info_imcomplete);
+		same_lock_as_before = this.getString(R.string.same_lock_as_before);
 		save_account.setOnClickListener(listener);
 		del_account.setOnClickListener(listener);
 	}
@@ -261,7 +261,7 @@ private String getRunningActivityName(){
 				        	ToNextActivityWithValueReturn(LockSetupActivity.class, 0);
 				        	return;
 				        }else{
-				        	MsgString.toastShow(getBaseContext(),"更新信息，设置的手势加密与之前设置相同");
+				        	commUI.toastShow(same_lock_as_before);
 				        	updateAccountInfo();
 							toNextActivity(ShowAccountListActivity.class, MsgString.BACKWARD);
 							return;
@@ -272,7 +272,7 @@ private String getRunningActivityName(){
 						return;
 					}
 				}else{
-					MsgString.toastShow(getBaseContext(),account_info_imcomplete);
+					commUI.toastShow(account_info_imcomplete);
 				}
 			
 				break;

@@ -45,7 +45,7 @@ public class RegisterActivity extends Activity {
 	private UserProfile userProfile;
 	private String inproper_username_psw, type_number_char;
 	private String user_name_exist;
-	private String password_diff;
+	private String password_diff, register_successfully, register_failed;
 	public MyApplication myApplication;
 	private long exitTime = 0;
 	String response_status = "";
@@ -102,13 +102,14 @@ public class RegisterActivity extends Activity {
 		password = (EditText) findViewById(R.id.register_password_input);
 		password_reinput = (EditText) findViewById(R.id.register_password_re_input);
 		register = (Button) findViewById(R.id.register_button);
-		commUI = new CommonUI(RegisterActivity.this);
+		commUI = new CommonUI(this);
 		// validation msg
 		inproper_username_psw = this.getString(R.string.inproper_username_psw);
 		type_number_char = this.getString(R.string.type_number_char);
 		user_name_exist = this.getString(R.string.user_name_exist);
 		password_diff = this.getString(R.string.password_diff);
-
+		register_successfully = this.getString(R.string.register_successfully);
+		register_failed = this.getString(R.string.register_failed);
 		//
 		remember_password_check = (CheckBox) findViewById(R.id.remember_password_check_register);
 		auto_login_check = (CheckBox) findViewById(R.id.auto_login_check_register);
@@ -161,7 +162,6 @@ public class RegisterActivity extends Activity {
 		@Override
 		public void run() {
 			Looper.prepare();
-			
 			usernameExist(); 
 			Looper.loop();
 		}
@@ -190,7 +190,7 @@ public class RegisterActivity extends Activity {
 
 			case FAILURE:
 				commUI.dismissProgressDialog();
-				//commUI.toastShow(MsgString.FAILED);
+				//如果该用户名不存在， 则注册用户。
 				new Thread(insertRun).start();
 				break;
 			}
@@ -201,7 +201,6 @@ public class RegisterActivity extends Activity {
 		@Override
 		public void run() {
 			Looper.prepare();
-			
 			if (remember_password_check.isChecked()) {
 				// 记住用户名、密码、
 				setEditor();
@@ -229,7 +228,7 @@ public class RegisterActivity extends Activity {
 			switch (msg.what) {
 			case SUCCESS:
 				commUI.dismissProgressDialog();
-				commUI.toastShow(MsgString.SUCCESS);
+				commUI.toastShow(register_successfully);
 				//registerIntoDB();// register username and password into
 				setMyApplication();
 				clickToAccountList();// to next activity
@@ -237,7 +236,7 @@ public class RegisterActivity extends Activity {
 
 			case FAILURE:
 				commUI.dismissProgressDialog();
-				commUI.toastShow(MsgString.FAILED);
+				commUI.toastShow(register_failed);
 				break;
 			}
 		}
@@ -267,16 +266,16 @@ public class RegisterActivity extends Activity {
 		Matcher username_matcher = pattern.matcher(userNameString);
 		if (null == userNameString || userNameString.length() <= 5
 				|| null == psdString || psdString.length() <= 5) {
-			toastShow(inproper_username_psw);
+			commUI.toastShow(inproper_username_psw);
 			return false;
 		} else if (!username_matcher.matches()) {
-			toastShow(type_number_char);
+			commUI.toastShow(type_number_char);
 			return false;
 		} /*else if (usernameExist()) {
 			toastShow(user_name_exist);
 			return false;
 		}*/ else if (!psdString_reinput.equals(psdString)) {
-			toastShow(password_diff);
+			commUI.toastShow(password_diff);
 			return false;
 		} else {
 			return true;

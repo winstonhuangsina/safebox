@@ -98,7 +98,7 @@ public class AddAccountActivity extends Activity {
 				R.id.menu_share).getActionProvider();
 		// Initialize the share intent
 		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.setType(share_text_type);
+		intent.setType("text/plain");
 		intent.putExtra(Intent.EXTRA_TEXT, share_extra_text);
 		provider.setShareIntent(intent);
 
@@ -186,11 +186,9 @@ public class AddAccountActivity extends Activity {
 					if (checkbox_gesture_password.isChecked()
 							&& patternString == null) {
 						// if not yet setup the lock pattern.
-						Intent intent = new Intent();
+						Intent intent = new Intent(AddAccountActivity.this, LockSetupActivity.class);
 						intent.putExtra(MsgString.FROM_ADD_ACCOUNT,
 								MsgString.FROM_ADD_ACCOUNT);
-						intent = new Intent(getBaseContext(),
-								LockSetupActivity.class);
 						startActivityForResult(intent, 0);
 					} else if(checkbox_gesture_password.isChecked()
 							&& patternString != null){
@@ -218,11 +216,7 @@ public class AddAccountActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (data != null) {
-			//boolean is_locked = data.getBooleanExtra(MsgString.IS_LOCKED, false);
-			/*System.out.println("get result from locksetup activity is_locked= "
-					+ is_locked);*/
 			is_locked = true;
-			//accountInfo.setIs_locked(checkbox_gesture_password.isChecked());
 			addAccountInfo();
 			toNextActivity();
 		}

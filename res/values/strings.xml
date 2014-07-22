@@ -27,6 +27,8 @@
     <string name="user_name_exist">该用户名已经存在</string>
     <string name="user_name_not_empty">用户名或密码不能为空</string>
     <string name="password_diff">两次输入的密码不同，请重新输入</string>
+    <string name="register_successfully">注册成功！</string>
+    <string name="register_failed">注册失败！</string>
 
     <!-- Login page -->
     <string name="login">Login</string>
@@ -94,8 +96,6 @@
     
     <string name="logout_success">完成注销</string>
     
-
-    
     
     <!--  -->
     <string name="encrypt_key">safebox_encrypt_code</string>
@@ -141,7 +141,8 @@
     <string name="turn_off_lock_pattern">关闭手势密码</string>
     <string name="turn_off_lock_pattern_by_unlock">关闭手势密码</string>
     <string name="clear_lock_by_unlock_link">通过解锁来清空手势密码</string>
-    
+    <string name="same_lock_as_before">更新信息，设置的手势加密与之前设置相同</string>
+   
     
     <!-- network  -->
     <string name="network_not_available">网络无法连接！</string>

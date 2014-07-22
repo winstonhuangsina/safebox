@@ -30,6 +30,7 @@ public class MsgString {
 	public final static String AUTO_LOGIN_IS_CHECK = "AUTO_LOGIN_IS_CHECK";
 	public final static String USERNAME_LOGIN = "USERNAME_LOGIN";
 	public final static String PASSWORD_LOGIN = "PASSWORD_LOGIN";
+	public final static String LOGIN_SHARED_PREFERENCE = "userInfo";
 	
 	//Show account list activity
 	public final static String IS_LOCK_TRUE = "true";

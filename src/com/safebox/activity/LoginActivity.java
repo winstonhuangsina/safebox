@@ -92,10 +92,7 @@ public class LoginActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(null != savedInstanceState){
-			System.out.println("#########login savedInstanceState ################");
-
-		}
+		
 		setContentView(R.layout.login);
 		initial();// initial all variate within the intial();
 		autoLoginAndRememberPsw(); // click the text "login" to the login activity
@@ -155,7 +152,7 @@ public class LoginActivity extends Activity {
 
 	
 	private void autoLoginAndRememberPsw() {
-		sp = this.getSharedPreferences("userInfo", MODE_PRIVATE); 
+		sp = this.getSharedPreferences(MsgString.LOGIN_SHARED_PREFERENCE, MODE_PRIVATE); 
 		 //判断记住密码多选框的状态  
 		if (sp.getBoolean(REM_PSW_IS_CHECK, false)) {
 			// 设置默认是记录密码状态
@@ -221,12 +218,12 @@ public class LoginActivity extends Activity {
 				break;
 			case R.id.login_button:
 				// get the string value to validate
+				userName.setText("winstonregister");
+				password.setText("winston");
+				
 				userNameString = userName.getText().toString();
 				psdString = password.getText().toString();
-				Log.v("onClick username = ", userNameString);
-		        Log.v("onClick password = ", psdString);
 				userProfile = new UserProfile(userNameString, psdString);
-				//loginAction = new LoginAction(userProfile, LoginActivity.this);
 				if (validateInput()) {
 					validateNamePswExist();
 				}

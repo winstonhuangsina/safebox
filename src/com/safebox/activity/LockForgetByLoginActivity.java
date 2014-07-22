@@ -76,8 +76,8 @@ public class LockForgetByLoginActivity extends Activity {
 		lock_forget_cancel_button = (Button) findViewById(R.id.lock_forget_cancel_button);
 		
 		commUI = new CommonUI(LockForgetByLoginActivity.this);
-		myApplication = (MyApplication) getApplication();
-		
+		myApplication = (MyApplication) this.getApplication();
+		myApplication.addActivity(this);
 		// validation msg
 		inproper_username_psw = this.getString(R.string.inproper_username_psw);
 		type_number_char = this.getString(R.string.type_number_char);

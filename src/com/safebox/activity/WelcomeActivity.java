@@ -1,4 +1,6 @@
 package com.safebox.activity;
+import com.safebox.msg.MyApplication;
+
 import intent.pack.R;
 import android.app.Activity;  
 import android.content.Intent;  
@@ -11,7 +13,8 @@ import android.view.WindowManager;
 public class WelcomeActivity extends Activity {  
     private final int SPLASH_DELAY_TIME = 1000 ;  
     private String Tag = "WelcomeActivity" ;  
-      
+    public MyApplication myApplication;
+    
     @Override  
     public void onCreate(Bundle savedInstanceState) {  
         Log.i(Tag , "onCreate()" );  
@@ -19,7 +22,8 @@ public class WelcomeActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   WindowManager.LayoutParams.FLAG_FULLSCREEN);  
         requestWindowFeature(Window.FEATURE_NO_TITLE);  
         setContentView(R.layout.welcome);  
-          
+        myApplication = (MyApplication) this.getApplication();
+		myApplication.addActivity(this);  
         new Handler().postDelayed(  
                 new Runnable()  
                 {  

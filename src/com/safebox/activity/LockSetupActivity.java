@@ -54,6 +54,7 @@ public class LockSetupActivity extends Activity implements
         setContentView(R.layout.activity_lock_setup);
         identifyFromWhichActivity();
         myApplication = (MyApplication) this.getApplication();
+		myApplication.addActivity(this);
         lockPatternView = (LockPatternView) findViewById(R.id.lock_pattern);
         lockPatternView.setOnPatternListener(this);
         leftButton = (Button) findViewById(R.id.left_btn);
@@ -142,14 +143,11 @@ public class LockSetupActivity extends Activity implements
                 if(from_add_account){
                 	Intent intent = getIntent(); 
                     intent.putExtra(MsgString.IS_LOCKED, false);// 放入返回值 
-                    System.out.println("is locked in " + step);
                     setResult(RESULT_OK, intent);// 放入回传的值,并添加一个Code,方便区分返回的数据 
                     finish();//
                     break;
                 }else if(from_save_account){
                 	Intent intent = getIntent(); 
-                    //intent.putExtra(MsgString.IS_LOCKED, false);// 放入返回值 
-                    //System.out.println("is locked in " + step);
                     setResult(RESULT_OK, intent);// 放入回传的值,并添加一个Code,方便区分返回的数据 
                     finish();
                     break;

@@ -241,7 +241,6 @@ public class ShowAccountListActivity extends Activity{
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menuonactionbar, menu);
 
@@ -257,6 +256,10 @@ public class ShowAccountListActivity extends Activity{
         
 		return true;
 	}
+	
+	
+	
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -264,7 +267,7 @@ public class ShowAccountListActivity extends Activity{
 		MyApplication myApplication = (MyApplication) getApplication();
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			sp = this.getSharedPreferences("userInfo", MODE_PRIVATE);
+			sp = this.getSharedPreferences(MsgString.LOGIN_SHARED_PREFERENCE, MODE_PRIVATE);
 			sp.edit().putBoolean(MsgString.AUTO_LOGIN_IS_CHECK, false).commit();
 			
 			//Intent intent = new Intent();

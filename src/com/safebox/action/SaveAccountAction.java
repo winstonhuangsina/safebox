@@ -29,11 +29,11 @@ public class SaveAccountAction {
 	}
 
 	public void addAccountInfoIntoDB() {
-		System.out.println("##########site_name = " + site_name);
+		/*System.out.println("##########site_name = " + site_name);
 		System.out.println("##########account_name = " + account_name);
-		System.out.println("##########account_password = " + account_password);
+		System.out.println("##########account_password = " + account_password);*/
 		accountInfoDB.insert(site_name, account_name, account_password, account_type, is_locked, user_id);
-		Toast.makeText(con, "Add account Successed!", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(con, "Add account Successed!", Toast.LENGTH_SHORT).show();
 	}
 	
 	public void updateAccountInfo(){

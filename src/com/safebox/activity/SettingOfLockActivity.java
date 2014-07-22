@@ -97,16 +97,17 @@ private String getRunningActivityName(){
 		clear_lock_button = (Button) findViewById(R.id.clear_lock_button);
 		reset_lock_button = (Button) findViewById(R.id.reset_lock_button);
 		//test_authorize_button = (Button) findViewById(R.id.test_authorize_button);
-		test_button = (Button) findViewById(R.id.test_button);
+		//test_button = (Button) findViewById(R.id.test_button);
 		//login();
 		clear_lock_button.setOnClickListener(listener);
 		reset_lock_button.setOnClickListener(listener);
-		test_button.setOnClickListener(listener);
+		//test_button.setOnClickListener(listener);
 		//test_authorize_button.setOnClickListener(listener);
 		
 		set_lock_text = this.getString(R.string.set_lock_pattern);
 		clear_lock_text = this.getString(R.string.clear_lock_pattern);
 		myApplication = (MyApplication) this.getApplication();
+		myApplication.addActivity(this);
 		SharedPreferences preferences = this.getSharedPreferences(myApplication.getGuestureLockKey(), MODE_PRIVATE);
 		if (preferences != null) {
 			patternString = preferences.getString(myApplication.getGuestureLockKey(), null);
@@ -181,10 +182,10 @@ private String getRunningActivityName(){
 			case R.id.reset_lock_button:
 				toNextActivity(UnLockActivity.class, MsgString.FORWARD);
 				break;
-			case R.id.test_button:
+			/*case R.id.test_button:
 					//toNextActivity(DeviceLocation.class, MsgString.FORWARD);
 				toNextActivity(FileUploadActivity.class, MsgString.FORWARD);
-				break;
+				break;*/
 			/*case R.id.test_authorize_button:
 					toNextActivity(AuthorizeActivity.class, MsgString.FORWARD);
 				break;*/
