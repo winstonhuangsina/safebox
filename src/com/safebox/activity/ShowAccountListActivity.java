@@ -203,7 +203,7 @@ public class ShowAccountListActivity extends Activity{
 				
 					AccountInfo accountInfo = accountList.get(position).getAccountInfo();
 				String account_name = accountInfo.getAccount_name();
-				String account_password = accountInfo.getAccount_name();
+				String account_password = accountInfo.getAccount_password();
 				String account_id = accountInfo.getAccount_id();
 				String site_name = accountInfo.getSite_name();
 				String account_type = accountInfo.getAccount_type();

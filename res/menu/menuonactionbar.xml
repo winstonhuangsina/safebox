@@ -2,12 +2,13 @@
     
    <item
         android:id="@+id/add_account"
-        android:icon="@drawable/ic_5_content_new"
+        android:icon="@drawable/add"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="@string/add_account"/>
    <item
         android:id="@+id/menu_settings"
+        android:icon="@drawable/setting"
         android:orderInCategory="101"
         android:showAsAction="ifRoom|withText"
         android:title="@string/setting"/>

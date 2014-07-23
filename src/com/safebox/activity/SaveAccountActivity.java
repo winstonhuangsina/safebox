@@ -56,7 +56,8 @@ public class SaveAccountActivity extends Activity {
 	private EditText account_name, account_password, site_name;
 	private Button save_account, del_account;
 	private CheckBox checkbox_gesture_password = null;
-	private String site_name_string, account_name_string, account_password_string, account_type_string, account_info_imcomplete, spin_account_type_hint, same_lock_as_before;
+	private String site_name_string, account_name_string, account_password_string, account_type_string;
+	private String account_info_imcomplete, spin_account_type_hint, same_lock_as_before, del_account_successfully;
 	private String account_id_string;
 	private SaveAccountAction saveAccountAction;
 	private AccountInfo accountInfo = new AccountInfo();
@@ -100,6 +101,7 @@ public class SaveAccountActivity extends Activity {
 		checkbox_gesture_password = (CheckBox) findViewById(R.id.checkbox_gesture_password);
 		account_info_imcomplete = this.getString(R.string.account_info_imcomplete);
 		same_lock_as_before = this.getString(R.string.same_lock_as_before);
+		del_account_successfully = this.getString(R.string.del_account_successfully);
 		save_account.setOnClickListener(listener);
 		del_account.setOnClickListener(listener);
 	}
@@ -362,6 +364,7 @@ private String getRunningActivityName(){
 		saveAccountAction = new SaveAccountAction(accountInfo,
 				SaveAccountActivity.this);
 		saveAccountAction.delAccountInfoById(account_id_string);
+		commUI.toastShow(del_account_successfully);
 	}
 	
 	

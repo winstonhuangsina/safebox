@@ -125,7 +125,7 @@ public class AccountInfoDB {
 	public void update(boolean set_unlock){
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues cv = new ContentValues();
-		cv.put(MsgString.IS_LOCKED, false);
+		cv.put(MsgString.IS_LOCKED, String.valueOf(false));
 		db.update(MsgString.ACCOUNT_INFO_TABLE, cv, null, null);
 		if(db.isOpen())
 			db.close();

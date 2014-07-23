@@ -52,6 +52,7 @@
     <!-- Save/Edit Account Info Page -->
     <string name="account_info_imcomplete">添加完整的信息，以便查询</string>
     <string name="spin_account_type_hint">请账户类型</string>
+    <string name="del_account_successfully">删除成功</string>
 
     <!-- Show account page -->
     <string name="nav_next">Navigation to Next</string>

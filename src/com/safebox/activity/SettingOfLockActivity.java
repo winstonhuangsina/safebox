@@ -66,32 +66,7 @@ private String getRunningActivityName(){
         String runningActivity=activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
         return runningActivity;
 }
-	
 
-
-	@Override
-	public void  onStart(){
-		super.onStart();
-	}
-	@Override
-	public void onRestart(){
-		super.onRestart();
-	}
-	
-	@Override
-	public void onResume(){
-		super.onResume();
-	}
-	
-	@Override
-	public void onStop(){
-		super.onStop();
-	}
-	
-	@Override
-	public void onDestroy(){
-		super.onDestroy();
-	}
 
 	private void initial() {
 		clear_lock_button = (Button) findViewById(R.id.clear_lock_button);

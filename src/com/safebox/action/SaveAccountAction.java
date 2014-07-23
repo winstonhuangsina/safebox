@@ -43,7 +43,6 @@ public class SaveAccountAction {
 	
 	public void delAccountInfoById(String id) {
 		accountInfoDB.delete(id);;
-		Toast.makeText(con, "del account Successed!", Toast.LENGTH_SHORT).show();
 	}
 	
 }
