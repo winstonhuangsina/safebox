@@ -155,6 +155,7 @@ public class LockSetupActivity extends Activity implements
                 else if(from_show_account_list){
                 	toNextActivityWithIntent(SaveAccountActivity.class, MsgString.FORWARD, getIntent());
                 }else {
+                	
                 	toNextActivity(SettingOfLockActivity.class, MsgString.BACKWARD);
                 }
             }

@@ -218,8 +218,8 @@ public class LoginActivity extends Activity {
 				break;
 			case R.id.login_button:
 				// get the string value to validate
-				userName.setText("winstonregister");
-				password.setText("winston");
+				/*userName.setText("winstonregister");
+				password.setText("winston");*/
 				
 				userNameString = userName.getText().toString();
 				psdString = password.getText().toString();
