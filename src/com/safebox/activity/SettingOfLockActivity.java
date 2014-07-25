@@ -21,11 +21,9 @@ import com.safebox.action.RegisterAction;
 import com.safebox.backup.AsyncTaskTestActivity;
 import com.safebox.backup.OneButtonTestActivity;
 import com.safebox.bean.UserProfile;
-import com.safebox.msg.AuthorizeActivity;
 import com.safebox.msg.DeviceLocation;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
-import com.safebox.network.FileUploadActivity;
 
 public class SettingOfLockActivity  extends Activity {
 

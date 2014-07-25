@@ -153,20 +153,20 @@ public class UploadFile {
 				switch (msg.what) {
 				case SUCCESS:
 					String success = (String) msg.obj;
-					showDialog("上传成功" + success.toString().trim());
+					//showDialog("上传成功" + success.toString().trim());
 					break;
 
 				case FAILURE:
 					String failure = (String) msg.obj;
-					showDialog("上传失败" + failure.toString().trim());
+					//showDialog("上传失败" + failure.toString().trim());
 					break;
 				}
 			}
 		};
 	    
 		
-		
-	    /* 显示Dialog的method */
+		/*
+	     显示Dialog的method 
 	    private void showDialog(String mess) {
 	        new AlertDialog.Builder(context).setTitle("Message")
 	                .setMessage(mess)
@@ -174,5 +174,5 @@ public class UploadFile {
 	                    public void onClick(DialogInterface dialog, int which) {
 	                    }
 	                }).show();
-	    }
+	    }*/
 }

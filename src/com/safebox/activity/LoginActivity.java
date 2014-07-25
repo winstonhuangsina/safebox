@@ -12,7 +12,7 @@ import com.safebox.backup.TestByButtonActivity;
 import com.safebox.backup.TestNetworkActivity;
 import com.safebox.backup.UserManager;
 import com.safebox.bean.UserProfile;
-import com.safebox.msg.AuthorizeActivity;
+//import com.safebox.msg.AuthorizeActivity;
 import com.safebox.msg.CommonUI;
 import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
@@ -43,11 +43,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.weibo.net.AccessToken;
+/*import com.weibo.net.AccessToken;
 import com.weibo.net.DialogError;
 import com.weibo.net.Weibo;
 import com.weibo.net.WeiboDialogListener;
-import com.weibo.net.WeiboException;
+import com.weibo.net.WeiboException;*/
 
 import android.app.ProgressDialog;
 
@@ -239,7 +239,7 @@ public class LoginActivity extends Activity {
 	
 	
 	
-	private void loginByWeibo(){
+	/*private void loginByWeibo(){
 
 		Weibo weibo = Weibo.getInstance();
 		weibo.setupConsumerConfig(CONSUMER_KEY, CONSUMER_SECRET);
@@ -293,7 +293,7 @@ public class LoginActivity extends Activity {
 
 	
 		}
-	
+	*/
 	private boolean validateInput() {
 		Pattern pattern = Pattern.compile("[0-9a-zA-Z\u4E00-\u9FA5]+");
 		Matcher username_matcher = pattern.matcher(userNameString);

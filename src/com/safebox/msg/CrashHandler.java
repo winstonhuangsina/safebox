@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import com.safebox.network.FileUploadActivity;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -154,32 +153,18 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	}
     
     
-    private void sendExceptionByString(String exceptionMsg){
-    	
-    	HttpClientToServer httpClientToServer = new HttpClientToServer(exceptionMsg, MsgString.PARAMS_QUERY);
-    	if(httpClientToServer.isNetworkAvailable(mContext)){
-    		String response = httpClientToServer.doPost();
-    		Log.v(" response is ", response);
-    		
-    		if (response.equals(MsgString.FAILED)) {
-    			handlerException.obtainMessage(0).sendToTarget();
-    		} else {
-    			handlerException.obtainMessage(1).sendToTarget();
-    		}
-    	}
-    	
-    }
+    
     
     Handler handlerException = new Handler() {
 
 		public void handleMessage(Message msg) {// 此方法在ui线程运行
 			switch (msg.what) {
 			case SUCCESS:
-				commUI.toastShow("出错信息已发送");
+				//commUI.toastShow("出错信息已发送");
 				break;
 
 			case FAILURE:
-				commUI.toastShow("出错信息未捕获");
+				//commUI.toastShow("出错信息未捕获");
 				break;
 			}
 		}

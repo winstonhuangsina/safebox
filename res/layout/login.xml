@@ -23,52 +23,76 @@
         android:orientation="vertical"
         android:padding="15dip" >
         <!-- 账号 -->
-
-        <TextView
+<RelativeLayout
+    	android:id="@+id/login_acct_relative_id"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_login_div_bg" >
+       <ImageView
+            android:id="@+id/login_img"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:background="@drawable/login_account"
+            android:contentDescription="@string/login_img_text" /> 
+        <!-- <TextView
             android:id="@+id/login_user_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
-            android:text="@string/login_label_username" />
+            android:background="@drawable/background_login_div_bg"
+            android:text="@string/login_label_username" /> -->
 
         <EditText
             android:id="@+id/login_username_input"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/login_user_label"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
             android:hint="@string/login_label_username_hint"
             android:inputType="text"
+            android:layout_gravity="right"
+            android:background="@drawable/background_textedit"
             android:singleLine="true" />
-        
-        <!-- android:background="@drawable/texteditbackground"  -->
+ </RelativeLayout>       
+        <!-- android:layout_below="@id/login_user_label"
+        android:background="@drawable/texteditbackground"  -->
         <!-- 密码 text -->
 
+<RelativeLayout
+    	android:id="@+id/login_password_relative_id"
+        android:layout_width="fill_parent"
+         android:layout_below="@id/login_acct_relative_id"
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/login_password_label"
             style="@style/normalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/login_username_input"
             android:layout_marginTop="3dp"
+            android:layout_gravity="left"
             android:text="@string/login_label_password" />
 
         <EditText
             android:id="@+id/login_password_input"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/login_password_label"
+            android:layout_gravity="right"
             android:inputType="textPassword"
             android:singleLine="true" />
-
+</RelativeLayout> 
         <!-- 登录button -->
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@id/login_password_input"
-            android:layout_below="@id/login_password_input"
+            android:layout_alignRight="@id/login_password_relative_id"
+            android:layout_below="@id/login_password_relative_id"
             android:background="@drawable/background_login_div_bg"
             android:text="@string/login_button_label" />
         
@@ -76,7 +100,7 @@
             android:id="@+id/remember_password_check"  
             android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
-            android:layout_below="@id/login_password_input"  
+            android:layout_below="@id/login_password_relative_id"  
             android:text="@string/remember_password"   
             android:textSize="13sp"/>  
   

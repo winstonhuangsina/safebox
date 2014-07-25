@@ -26,7 +26,7 @@
     </style>
        
     <style name="MyActionBar" parent="@android:style/Widget.DeviceDefault.Light.ActionBar">
-        <item name="android:background">#1c99c7</item>   标题栏颜色
+        <item name="android:background">@drawable/background_actionbar</item>   标题栏颜色 
         <item name="android:backgroundStacked">#BBBBBB</item>  导航栏颜色
         <item name="android:backgroundSplit">#000000</item>  底部操作栏颜色
          <!-- <item name="android:actionBarDivider">@drawable/ab_divider</item> -->

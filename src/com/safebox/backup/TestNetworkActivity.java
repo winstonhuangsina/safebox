@@ -41,7 +41,7 @@ public class TestNetworkActivity extends Activity {
         StrictMode.setThreadPolicy(policy);*/
         username = (EditText)findViewById(R.id.login_username_input);
         password = (EditText)findViewById(R.id.login_password_input);
-        tv = (TextView)findViewById(R.id.login_user_label);
+        //tv = (TextView)findViewById(R.id.login_user_label);
         
         login = (Button)findViewById(R.id.login_button);
         //reset = (Button)findViewById(R.id.reset);

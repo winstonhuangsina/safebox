@@ -17,7 +17,6 @@ import com.safebox.msg.CommonUI;
 import com.safebox.msg.HttpClientToServer;
 import com.safebox.msg.MsgString;
 import com.safebox.msg.MyApplication;
-import com.safebox.network.FileUploadActivity;
 import com.safebox.network.UploadFile;
 
 import intent.pack.R;
